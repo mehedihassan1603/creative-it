@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download PDF</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta5/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            position: relative;
+        }
+
+        img {
+            width: 100%;
+            display: block;
+        }
+
+        .overlay-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: rgb(226, 5, 5);
+            font-size: 2em;
+        }
+
+        #download-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <img id="originalImage" src="https://www.certificate.creativeit.xyz/front/images/certificate/certificate5.jpg" alt="">
+        <div class="overlay-text">
+            <h1>Hiii</h1>
+        </div>
+    </div>
+
+    <a id="download-link" download="image-with-overlay.pdf" onclick="downloadPDF()">Download PDF</a>
+
+    <script>
+        function downloadPDF() {
+            // Use html2canvas to capture the content of the div as an image
+            html2canvas(document.querySelector('div')).then(canvas => {
+                // Create a PDF document
+                const pdf = new jsPDF();
+                
+                // Add the captured image to the PDF
+                pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, pdf.internal.pageSize.width, pdf.internal.pageSize.height);
+                
+                // Save the PDF
+                pdf.save('image-with-overlay.pdf');
+            });
+        }
+    </script>
+</body>
+</html>
