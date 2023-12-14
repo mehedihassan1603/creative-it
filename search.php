@@ -8,8 +8,15 @@ $dbname = "creativeit";
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
-    die("connection failed" . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
+
+
+require 'vendor/autoload.php';
+
+include 'src/QRCode.php';
+include 'src/QROptions.php';
+
 
 // Use prepared statement to prevent SQL injection
 $searchId = $_GET['certificate_id'];
@@ -21,8 +28,20 @@ $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
+    $qrCodeText = "Certificate ID: {$row['certificate_id']}\nName: {$row['name']}";
+    $qrCodeOptions = new chillerlan\QRCode\QROptions([
+        'outputType' => 'png',
+        'eccLevel'   => chillerlan\QRCode\QRCode::ECC_L,
+    ]);
+    
+
+    $qrCode = new chillerlan\QRCode\QRCode($qrCodeOptions);
+    $qrImagePath = 'save/qr_code.png';
+    $qrCode->render($qrCodeText, $qrImagePath);
+
+    // HTML and CSS for Certificate Display
     echo "<div style='width: 80%; margin-left: auto; margin-right: auto;'>";
-    echo "<h2 style='color: #05613F; background-color: #12EA9C; padding: 5px; border-radius: 10px'>Certified</h2>";
+    echo "<h2 style='color: #05613F; background-color: #12EA9C; padding: 5px; border-radius: 10px;'>Certified</h2>";
     echo "<div style='display: flex;'>";
     echo "<div style='width: 50%; padding-left:40px;'>";
     echo "<h4>Certificate ID: {$row['certificate_id']}</h4>";
@@ -39,24 +58,28 @@ if ($result->num_rows > 0) {
     echo "</div>";
     echo "</div>";
 
-    echo "<h2>Generate Certificate Form:</h2>";
+    // HTML and CSS for Certificate Design
+    echo "<h2>Certificate Display:</h2>";
     echo "<div style='position: relative;'>";
     echo "<img src='https://www.certificate.creativeit.xyz/front/images/certificate/certificate5.jpg' width='100%'>";
     echo "<div style='position: absolute;top: 45%;left: 20%;transform: translate(-50%, -50%);color: black;'>";
-    echo "<p><span style='font-size: 24px; text-align: left;'>ID No:</span> <br><span style='font-size: 24px; font-weight: bold; text-align: left;'>{$row['certificate_id']}</span> <br> <br><span><span style='font-size: 24px; text-align: left;'>Date of Issue:</span> <br><span style='font-size: 24px; font-weight: bold; text-align: left;'>{$row['certificate_date']}</span> </p>";
+    echo "<p><span style='font-size: 18px; text-align: left;'>ID No:</span> <br><span style='font-size: 18px; font-weight: bold; text-align: left;'>{$row['certificate_id']}</span> <br> <br><span><span style='font-size: 18px; text-align: left;'>Date of Issue:</span> <br><span style='font-size: 18px; font-weight: bold; text-align: left;'>{$row['certificate_date']}</span> </p>";
     echo "</div>";
-   
-    echo "<div style='position: absolute;top: 45%;left: 35%;transform: translate(-50%, -50%);text-align: center;color: black;font-size: 2em;'>";
-    echo "<p style='font-size: 24px; text-align: left;'>Presented to<br><span style='font-size: 28px; font-weight: bold; text-align: left;'>{$row['name']}</span></p>";
+
+    echo "<div style='display:block;position: absolute; top: 42%; left: 45.5%; transform: translate(-50%, -50%); color: black; font-size: 2em; width: 400px;'>";
+    echo "<p style='font-size: 24px; text-align: left; margin: 0;'>Presented to<br><span style='font-size: 28px; font-weight: bold; text-align: left;'>{$row['name']}</span></p>";
     echo "</div>";
-    echo "<div style='position: absolute;top: 50.5%;left: 53.5%;transform: translate(-50%, -50%);color: black;'>";
-    echo "<p style='font-size: 20px; text-align: left;'>Child of {$row['father_name']} & {$row['mother_name']} has successfully completed the {$row['course_name']} course held on 30 August 2021 to 02 March 2022 at Creative IT Institute.</p>";
+
+    echo "<div style='position: absolute;top: 48%;left: 53.7%;transform: translate(-50%, -50%);color: black;'>";
+    echo "<p style='font-size: 17px; text-align: left;'>Child of <b>{$row['father_name']}</b> & <b>{$row['mother_name']}</b> has successfully completed the <b>{$row['course_name']}</b> course held on 30 August 2021 to 02 March 2022 at <span style='color: red'>Creative IT Institute.</span></p>";
     echo "</div>";
+    echo "<div style='position: absolute;top: 60%;left: 22%;transform: translate(-50%, -50%);color: black;'>";
+    echo "<img src='save/qr_code.png'>";
     echo "</div>";
     
-    // Add a link to trigger PDF generation and download
     echo "<a href='generate_pdf.php?certificate_id={$row['certificate_id']}'><button>Download PDF</button></a>";
-    
+    echo "<a href='generate_jpg.php?certificate_id={$row['certificate_id']}'><button>Download JPG</button></a>";
+
     echo "</div>";
 } else {
     echo "No Matching record found";

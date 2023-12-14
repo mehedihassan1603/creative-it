@@ -15,7 +15,10 @@
         nav {
             display: flex;
             justify-content: space-between;
-            align-items: center:
+            align-items: center;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
         }
 
         ul {
@@ -23,7 +26,6 @@
             display: flex;
             margin: 0;
             padding: 0;
-
         }
 
         li {
@@ -33,11 +35,47 @@
         a {
             text-decoration: none;
             font-weight: bold;
+            color: #fff;
         }
 
         h2 {
             margin-top: 40px;
             text-align: center;
+        }
+
+        form {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input {
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="text"] {
+            width: 200px;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
@@ -59,73 +97,13 @@
             <button>Login</button>
         </div>
     </nav>
-    <div class="body">
-        <h2>Add Students Informations:</h2>
-        <form action="insert.php" method="post">
-            <label for="certificate_id">Certificate ID:</label>
-            <input type="text" id="certificate_id" name="certificate_id" required>
-
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-
-            <label for="father_name">Father's Name:</label>
-            <input type="text" id="father_name" name="father_name" required>
-
-            <label for="mother_name">Mother's Name:</label>
-            <input type="text" id="mother_name" name="mother_name" required>
-
-            <label for="course_name">Course Name:</label>
-            <select id="course_name" name="course_name" required>
-                <option value="Web Development">Web Development</option>
-                <option value="Digital Marketing">Digital Marketing</option>
-                <option value="Web Design">Web Design</option>
-            </select>
-
-            <label for="batch_number">Batch Number:</label>
-            <input type="text" id="batch_number" name="batch_number" required>
-
-            <label for="course_end_date">Course End Date:</label>
-            <input type="date" id="course_end_date" name="course_end_date" required>
-
-            <label for="certificate_date">Certificate Date:</label>
-            <input type="date" id="certificate_date" name="certificate_date" required>
-
-            <input type="submit" value="Add to Database">
-        </form>
-
-        
-
-    </div>
 
     <h2>Search by ID:</h2>
     <form action="search.php" method="get">
-        <label for="searchId">Enter ID</label>
-        <input type="text" id="searchId" name="certificate_id">
+        <label for="searchId">Enter ID:</label>
+        <input type="text" id="searchId" name="certificate_id" required>
         <input type="submit" value="Search">
     </form>
-
-    <div>
-        <!-- <h2>Student List: </h2> -->
-        <?php
-        // $servername = "localhost";
-        // $username = "root";
-        // $password = "";
-        // $dbname = "creativeit";
-        
-        // $conn = new mysqli($servername, $username, $password, $dbname);
-        
-        // if ($conn->connect_error){
-        //     die("connection failed" . $conn->connect_error);
-        // }
-        // $result = $conn -> query("SELECT * FROM students");
-        // while ($row = $result->fetch_assoc()){
-        //     echo "<li>{$row['name']} - Course: {$row['course']} - Batch: {$row['batch']}</li>";
-        // }
-        // $conn->close();
-        ?>
-    </div>
-
-
 </body>
 
 </html>
