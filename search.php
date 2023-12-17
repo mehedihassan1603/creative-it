@@ -1,4 +1,5 @@
 <?php
+include 'navbar.php'; 
 
 $servername = "localhost";
 $username = "root";
@@ -59,7 +60,7 @@ if ($result->num_rows > 0) {
     echo "</div>";
 
     // HTML and CSS for Certificate Design
-    echo "<h2>Certificate Display:</h2>";
+    echo "<h2 style='text-align:center; margin-top:20px;'>Certificate Display:</h2>";
     echo "<div style='position: relative;'>";
     echo "<img src='https://www.certificate.creativeit.xyz/front/images/certificate/certificate5.jpg' width='100%'>";
     echo "<div style='position: absolute;top: 45%;left: 20%;transform: translate(-50%, -50%);color: black;'>";
@@ -77,8 +78,36 @@ if ($result->num_rows > 0) {
     echo "<img src='save/qr_code.png'>";
     echo "</div>";
     
-    echo "<a href='generate_pdf.php?certificate_id={$row['certificate_id']}'><button>Download PDF</button></a>";
-    echo "<a href='generate_jpg.php?certificate_id={$row['certificate_id']}'><button>Download JPG</button></a>";
+    // Add CSS styles for the download buttons
+// Add CSS styles for the download buttons
+echo "<style>";
+echo ".button-container {";
+echo "  text-align: center;";
+echo "  justify-content: center;";
+echo "  margin-bottom: 50px;";
+echo "}";
+echo "a.button-link {";
+
+echo "  margin: 10px;";
+echo "  padding: 10px 20px;";
+echo "  text-decoration: none;";
+echo "  background-color: #4caf50;";
+echo "  color: #fff;";
+echo "  border: none;";
+echo "  border-radius: 4px;";
+echo "  cursor: pointer;";
+echo "  transition: background-color 0.3s;";
+echo "}";
+echo "a.button-link:hover {";
+echo "  background-color: #45a049;";
+echo "}";
+echo "</style>";
+
+// Display the download buttons in the center
+echo "<div class='button-container'>";
+echo "<a class='button-link' href='generate_pdf.php?certificate_id={$row['certificate_id']}' target='_blank'>Download PDF</a>";
+echo "<a class='button-link' href='generate_jpg.php?certificate_id={$row['certificate_id']}' target='_blank'>Download JPG</a>";
+echo "</div>";
 
     echo "</div>";
 } else {

@@ -82,9 +82,9 @@
 
 <body>
     <nav>
-        <div>
-            Creative IT
-        </div>
+    <div>
+    <img src="uploads/abc.png" alt="Logo" width="80px">
+    </div>
         <div>
             <ul>
                 <li><a href="">Home</a></li>
