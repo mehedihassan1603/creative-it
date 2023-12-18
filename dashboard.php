@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.20/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/72d0103d4a.js" crossorigin="anonymous"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -56,11 +59,9 @@
         table {
             width: 100%;
             max-width: 100%;
-            /* Set max-width to limit the table width */
             margin-top: 10px;
             border-collapse: collapse;
             overflow-x: auto;
-            /* Add overflow-x property for horizontal scrolling */
         }
 
         table,
@@ -87,32 +88,104 @@
             gap: 10px;
         }
 
+        .logo-container {
+            position: relative;
+        }
 
-        /* Responsive Styles */
-        @media only screen and (max-width: 600px) {
-            .statistics-box {
-                padding: 15px;
-                font-size: 16px;
-            }
+        .edit-icon {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 61%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            color: white;
+            /* Set the color of the edit icon */
+            background-color: #007bff;
+            /* Set the background color of the edit icon */
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 24px;
+        }
 
-            h3 {
-                font-size: 16px;
-            }
 
-            table {
-                font-size: 14px;
-            }
 
-            th,
-            td {
-                padding: 8px;
-            }
+        .logo-container:hover .edit-icon {
+            display: block;
+        }
+        nav form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100vh;
+        }
+
+        nav input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        nav input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        nav input[type="submit"]:hover {
+            background-color: #45a049;
         }
     </style>
-    <title>Statistics</title>
+    <title>Profile</title>
 </head>
 
 <body>
+    <div>
+        <nav class="flex justify-center logo-container relative">
+            <img class="bg-white w-48 rounded-full" src="uploads/abcde.png" alt="">
+            <i class="fa-solid fa-pen-to-square edit-icon hover:cursor-pointer" onclick="my_modal_6.showModal()"></i>
+            <dialog id="my_modal_6" class="modal modal-bottom sm:modal-middle">
+                <form action="upload.php" method="post" enctype="multipart/form-data">
+                    <h2>Upload Logo</h2>
+
+                    <label for="logo">Choose a logo:</label>
+                    <input class="text-black" type="file" id="logo" name="logo" accept="image/*" required>
+
+                    <input type="submit" value="Upload">
+                </form>
+                <form class="bg-red-600 text-center" method="dialog">
+                    <button><i class="fa-solid fa-xmark"></i></button>
+                </form>
+            </dialog>
+
+        </nav>
+        <div>
+            <h1 class="text-3xl text-center text-red">
+                <?php echo isset($_POST['newTitle']) ? htmlspecialchars($_POST['newTitle']) : 'Creative IT'; ?>
+                <i class="fa-solid fa-pen-to-square hover:cursor-pointer" onclick="my_modal_5.showModal()"></i>
+                <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+                    <form class="bg-blue-500 flex flex-col" method="post" action="">
+                        <label for="newTitle">Enter new website title:</label>
+                        <input type="text" id="newTitle" name="newTitle" required>
+                        <button class="mt-4 text-lg w-32 mx-auto bg-red-600 hover:bg-green-600" type="submit">Click
+                            here</button>
+                    </form>
+                    <form class="bg-red-600" method="dialog">
+                        <button><i class="fa-solid fa-xmark"></i></button>
+                    </form>
+                </dialog>
+
+            </h1>
+
+        </div>
+    </div>
 
     <div class="content">
         <?php
@@ -145,34 +218,14 @@
             </div>
         </div>
 
-        <h3>Students Information</h3>
-        <table>
-            <tr>
-                <th>Certificate ID</th>
-                <th>Name</th>
-                <th>Father's Name</th>
-                <th>Mother's Name</th>
-                <th>Course Name</th>
-                <th>Batch Number</th>
-                <th>Course End Date</th>
-                <th>Certificate Date</th>
-            </tr>
-
-            <?php
-            while ($row = $studentsResult->fetch_assoc()) {
-                echo "<tr>";
-                echo "<td>" . $row['certificate_id'] . "</td>";
-                echo "<td>" . $row['name'] . "</td>";
-                echo "<td>" . $row['father_name'] . "</td>";
-                echo "<td>" . $row['mother_name'] . "</td>";
-                echo "<td>" . $row['course_name'] . "</td>";
-                echo "<td>" . $row['batch_number'] . "</td>";
-                echo "<td>" . $row['course_end_date'] . "</td>";
-                echo "<td>" . $row['certificate_date'] . "</td>";
-                echo "</tr>";
-            }
-            ?>
-        </table>
+        <div class="flex gap-10 justify-center mt-20">
+        <div class="text-2xl border-2 border-orange-600 rounded-lg px-3 py-2 text-white cursor-pointer hover:bg-orange-600 hover:text-white">
+        <a href="admin.php?page=addStudents">Add Student</a>
+        </div>
+        <div class="text-2xl border-2 border-orange-600 rounded-lg px-3 py-2 text-white cursor-pointer hover:bg-orange-600 hover:text-white">
+        <a href="admin.php?page=students">View Student</a>
+        </div>
+        </div> 
     </div>
 
 </body>

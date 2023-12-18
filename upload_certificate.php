@@ -1,8 +1,8 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_FILES["logo"]) && $_FILES["logo"]["error"] == 0) {
-        $uploadDir = "uploads/"; 
-        $fixedFileName = "abcde.png";
+        $uploadDir = "certificate/"; 
+        $fixedFileName = "template.png";
         $uploadPath = $uploadDir . $fixedFileName;
 
         if (file_exists($uploadPath)) {

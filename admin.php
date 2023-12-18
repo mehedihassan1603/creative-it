@@ -34,6 +34,7 @@ if ($conn->connect_error) {
 
         .dashboard-container {
             display: flex;
+            width: 100%;
         }
 
         .sidebar {
@@ -86,9 +87,10 @@ if ($conn->connect_error) {
     <div class="dashboard-container">
         <div class="sidebar">
             <ul>
-                <li><a href="admin.php?page=dashboard">Home</a></li>
-                <li><a href="admin.php?page=addStudents">Add Student</a></li>
-                <li><a href="admin.php?page=logo">Add Logo</a></li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="admin.php?page=dashboard">Profile</a></li>
+                
+                
                 <li><a href="admin.php?page=certificate_list">Certificate List</a></li>
             </ul>
         </div>

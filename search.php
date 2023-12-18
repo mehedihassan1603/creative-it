@@ -62,7 +62,7 @@ if ($result->num_rows > 0) {
     // HTML and CSS for Certificate Design
     echo "<h2 style='text-align:center; margin-top:20px;'>Certificate Display:</h2>";
     echo "<div style='position: relative;'>";
-    echo "<img src='https://www.certificate.creativeit.xyz/front/images/certificate/certificate5.jpg' width='100%'>";
+    echo "<img src='certificate/template.png' width='100%'>";
     echo "<div style='position: absolute;top: 45%;left: 20%;transform: translate(-50%, -50%);color: black;'>";
     echo "<p><span style='font-size: 18px; text-align: left;'>ID No:</span> <br><span style='font-size: 18px; font-weight: bold; text-align: left;'>{$row['certificate_id']}</span> <br> <br><span><span style='font-size: 18px; text-align: left;'>Date of Issue:</span> <br><span style='font-size: 18px; font-weight: bold; text-align: left;'>{$row['certificate_date']}</span> </p>";
     echo "</div>";
