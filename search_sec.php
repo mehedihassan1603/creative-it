@@ -74,18 +74,20 @@ if ($result->num_rows > 0) {
     //Certificate display section
     echo "<h2 style='text-align:center; margin-top:20px;'>Certificate Display:</h2>";
     echo "<div style='position: relative;'>";
-    echo "<img style='width: 100%; margin-left: auto; margin-right: auto;' src='https://www.certificate.creativeit.xyz/front/images/certificate/certificate5.jpg'>";
-    echo "<div style='position: absolute;top: 45%;left: 20%;transform: translate(-50%, -50%);color: black;'>";
-    echo "<p><span style='font-size: 18px; text-align: left;'>ID No:</span> <br><span style='font-size: 18px; font-weight: bold; text-align: left;'>{$row['certificate_id']}</span> <br> <br><span><span style='font-size: 18px; text-align: left;'>Date of Issue:</span> <br><span style='font-size: 18px; font-weight: bold; text-align: left;'>{$row['certificate_date']}</span> </p>";
+    echo "<div style='display: flex; width: 100%;'>";
+    echo "<img style='width: 80%; margin-left: auto; margin-right: auto;' src='certificate/SeminarCertificate.png'>";
     echo "</div>";
-    echo "<div style='display:block;position: absolute; top: 42%; left: 45.5%; transform: translate(-50%, -50%); color: black; font-size: 2em; width: 400px;'>";
-    echo "<p style='font-size: 24px; text-align: left; margin: 0;'>Presented to<br><span style='font-size: 28px; font-weight: bold; text-align: left;'>{$row['name']}</span></p>";
+    // echo "<div style='position: absolute;top: 45%;left: 20%;transform: translate(-50%, -50%);color: black;'>";
+    // echo "<p><span style='font-size: 18px; text-align: left;'>ID No:</span> <br><span style='font-size: 18px; font-weight: bold; text-align: left;'>{$row['certificate_id']}</span> <br> <br><span><span style='font-size: 18px; text-align: left;'>Date of Issue:</span> <br><span style='font-size: 18px; font-weight: bold; text-align: left;'>{$row['certificate_date']}</span> </p>";
+    // echo "</div>";
+    echo "<div style='display:block;position: absolute; top: 45%; left: 45%; transform: translate(-50%, -50%); color: black; font-size: 2em; width: 500px;'>";
+    echo "<p style='font-size: 40px; font-weight: bold; text-align: center;'>{$row['name']}</p>";
     echo "</div>";
-    echo "<div style='position: absolute;top: 48%;left: 53.7%;transform: translate(-50%, -50%);color: black;'>";
-    echo "<p style='font-size: 17px; text-align: left;'>Child of <b>{$row['father_name']}</b> & <b>{$row['mother_name']}</b> has successfully completed the <b>{$row['course_name']}</b> course held on 30 August 2021 to 02 March 2022 at <span style='color: red'>Creative IT Institute.</span></p>";
+    echo "<div style='position: absolute;top: 56%;left: 45%; width: 44%; transform: translate(-50%, -50%);color: black;'>";
+    echo "<p style='font-size: 18px; text-align: left;'>Child of <b>{$row['father_name']}</b> & <b>{$row['mother_name']}</b> has successfully completed the <b>{$row['course_name']}</b> course held on 30 August 2021 to 02 March 2022 at <span style='color: red'>Creative IT Institute.</span></p>";
     echo "</div>";
-    echo "<div style='position: absolute;top: 60%;left: 22%;transform: translate(-50%, -50%);color: black;'>";
-    echo "<img src='save/qr_code.png'>";
+    echo "<div style='position: absolute;top: 70%;left: 47%;transform: translate(-50%, -50%);color: black;'>";
+    echo "<img width='40%' src='save/qr_code.png'>";
     echo "</div>";
 
     echo "<style>";
@@ -93,6 +95,7 @@ if ($result->num_rows > 0) {
     echo "  text-align: center;";
     echo "  justify-content: center;";
     echo "  margin-bottom: 50px;";
+    echo "  margin-top: 20px;";
     echo "}";
     echo "a.button-link {";
 
@@ -112,8 +115,8 @@ if ($result->num_rows > 0) {
     echo "</style>";
 
     echo "<div class='button-container'>";
-    echo "<a class='button-link' href='generate_pdf.php?certificate_id={$row['certificate_id']}' target='_blank'>Download PDF</a>";
-    echo "<a class='button-link' href='generate_jpg.php?certificate_id={$row['certificate_id']}' target='_blank'>Download JPG</a>";
+    echo "<a class='button-link' href='generate_pdf_sec.php?certificate_id={$row['certificate_id']}' target='_blank'>Download PDF</a>";
+    echo "<a class='button-link' href='generate_jpg_sec.php?certificate_id={$row['certificate_id']}' target='_blank'>Download JPG</a>";
     echo "</div>";
 
     echo "</div>";
@@ -125,4 +128,3 @@ $stmt->close();
 $conn->close();
 
 ?>
-

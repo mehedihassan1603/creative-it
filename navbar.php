@@ -1,7 +1,7 @@
 
 <nav style="display: flex; justify-content: space-between; align-items: center; background-color: #333; color: #fff; padding: 10px 20px;">
     <div>
-        Creative IT
+    <img src="uploads/abcdef.png?<?php echo time(); ?>" alt="Logo" width="80px">
     </div>
     <div>
         <ul style="list-style-type: none; display: flex; margin: 0; padding: 0;">

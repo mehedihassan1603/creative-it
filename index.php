@@ -83,7 +83,7 @@
 <body>
     <nav>
     <div>
-    <img src="uploads/abcde.png" alt="Logo" width="80px">
+    <img src="uploads/abcdef.png?<?php echo time(); ?>" alt="Logo" width="80px">
     </div>
         <div>
             <ul>
@@ -98,12 +98,36 @@
         </div>
     </nav>
 
+    <?php
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        
+        $selectedSearchType = $_POST['searchType'];
+
+        switch ($selectedSearchType) {
+            case 'search':
+                $formAction = 'search.php';
+                break;
+            case 'search_sec':
+                $formAction = 'search_sec.php';
+                break;
+            default:
+                $formAction = ''; 
+                break;
+        }
+    } else {
+        $formAction = '';
+    }
+    ?>
+
     <h2>Search by ID:</h2>
-    <form action="search.php" method="get">
+    <form id="searchForm" method="get" action="<?php echo $formAction; ?>">
+        <!-- Your existing form content -->
         <label for="searchId">Enter ID:</label>
         <input type="text" id="searchId" name="certificate_id" required>
         <input type="submit" value="Search">
     </form>
+
+    
 </body>
 
 </html>

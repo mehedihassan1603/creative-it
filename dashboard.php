@@ -113,6 +113,7 @@
         .logo-container:hover .edit-icon {
             display: block;
         }
+
         nav form {
             background-color: #fff;
             padding: 20px;
@@ -149,21 +150,25 @@
 <body>
     <div>
         <nav class="flex justify-center logo-container relative">
-            <img class="bg-white w-48 rounded-full" src="uploads/abcde.png" alt="">
+        <img class="bg-white w-48 rounded-full" src="uploads/abcdef.png?"<?php echo time(); ?> alt="Logo" width="80px">
             <i class="fa-solid fa-pen-to-square edit-icon hover:cursor-pointer" onclick="my_modal_6.showModal()"></i>
             <dialog id="my_modal_6" class="modal modal-bottom sm:modal-middle">
-                <form action="upload.php" method="post" enctype="multipart/form-data">
+                <form id="uploadForm" enctype="multipart/form-data">
                     <h2>Upload Logo</h2>
 
                     <label for="logo">Choose a logo:</label>
                     <input class="text-black" type="file" id="logo" name="logo" accept="image/*" required>
 
-                    <input type="submit" value="Upload">
+                    <input class="text-black" type="button" value="Upload" onclick="uploadLogo()">
                 </form>
                 <form class="bg-red-600 text-center" method="dialog">
-                    <button><i class="fa-solid fa-xmark"></i></button>
+                    <button onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
                 </form>
             </dialog>
+
+            
+
+
 
         </nav>
         <div>
@@ -219,15 +224,73 @@
         </div>
 
         <div class="flex gap-10 justify-center mt-20">
-        <div class="text-2xl border-2 border-orange-600 rounded-lg px-3 py-2 text-white cursor-pointer hover:bg-orange-600 hover:text-white">
-        <a href="admin.php?page=addStudents">Add Student</a>
+            <div
+                class="text-2xl border-2 border-orange-600 rounded-lg px-3 py-2 text-white cursor-pointer hover:bg-orange-600 hover:text-white">
+                <a href="admin.php?page=addStudents">Add Student</a>
+            </div>
+            <div
+                class="text-2xl border-2 border-orange-600 rounded-lg px-3 py-2 text-white cursor-pointer hover:bg-orange-600 hover:text-white">
+                <a href="admin.php?page=students">View Student</a>
+            </div>
         </div>
-        <div class="text-2xl border-2 border-orange-600 rounded-lg px-3 py-2 text-white cursor-pointer hover:bg-orange-600 hover:text-white">
-        <a href="admin.php?page=students">View Student</a>
-        </div>
-        </div> 
     </div>
 
+    <form class="text-black" id="searchForm" method="post" action="index.php">
+    <label for="searchType">Select Search Type:</label>
+    <select id="searchType" name="searchType" onchange="toggleSubmitButton()">
+        <option value="selected" disabled selected>Select Search Type</option>
+        <option value="search">Search</option>
+        <option value="search_sec">Search (Secondary)</option>
+    </select>
+    <input type="submit" value="OK" id="submitButton" disabled>
+</form>
+
+
+    
+
+
+    
+    <script>
+                function uploadLogo() {
+                    var formData = new FormData(document.getElementById('uploadForm'));
+
+                    fetch('upload.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                alert('Logo uploaded successfully!');
+                                location.reload(); // Reload the page
+                            } else {
+                                alert('Error uploading logo. Please try again.');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('An error occurred. Please try again.');
+                        });
+                }
+
+                function closeModal() {
+                    // Implement logic to close the modal as needed
+                    // For example, you can set the dialog attribute 'open' to false
+                    document.getElementById('my_modal_6').open = false;
+                }
+
+                function toggleSubmitButton() {
+        var selectedValue = document.getElementById("searchType").value;
+        var submitButton = document.getElementById("submitButton");
+
+        if (selectedValue !== "selected") {
+            submitButton.removeAttribute("disabled");
+        } else {
+            submitButton.setAttribute("disabled", "disabled");
+        }
+    }
+
+            </script>
 </body>
 
 </html>
