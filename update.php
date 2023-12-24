@@ -10,7 +10,6 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Assuming you receive the updated student details through POST parameters
 $studentId = $_POST['id'];
 $updatedCertificateId = $_POST['certificate_id'];
 $updatedName = $_POST['name'];
@@ -21,7 +20,6 @@ $updatedBatchNumber = $_POST['batch_number'];
 $updatedCourseEndDate = $_POST['course_end_date'];
 $updatedCertificateDate = $_POST['certificate_date'];
 
-// Update the student details in the database
 $updateStudentQuery = "UPDATE students SET
     certificate_id = '$updatedCertificateId',
     name = '$updatedName',

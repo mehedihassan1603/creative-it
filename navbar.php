@@ -12,7 +12,6 @@
         </ul>
     </div>
     <div>
-    <button style="margin: 0 10px;"><a href="admin.php" style="text-decoration: none; font-weight: bold; color: #fff;">Admin</a></button>
-
-    </div>
+            <button style="background-color: orange; padding: 12px;"><a href="admin.php" class="text-white">Admin</a></button>
+        </div>
 </nav>

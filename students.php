@@ -10,12 +10,10 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Handle filter submissions
 $filterCertificateId = isset($_POST['filter_certificate_id']) ? $_POST['filter_certificate_id'] : '';
 $filterCourseName = isset($_POST['filter_course_name']) ? $_POST['filter_course_name'] : '';
 
-// Build the WHERE clause based on the filters
-$whereClause = "WHERE 1"; // default WHERE condition
+$whereClause = "WHERE 1";
 
 if ($filterCertificateId !== '') {
     $whereClause .= " AND certificate_id = '$filterCertificateId'";
@@ -56,12 +54,11 @@ $studentsResult = $conn->query($studentsQuery);
 
         <!-- Filter Form -->
         <form method="post" class="mt-8 mb-4 bg-gray-500 text-center">
-            <div class="flex justify-center space-x-4">
+            <div class="flex flex-col md:flex-row justify-center space-x-4">
                 <div>
                     <label for="filter_certificate_id" class="block text-white">Filter by Certificate ID:</label>
                     <input type="text" id="filter_certificate_id" name="filter_certificate_id"
-                        value="<?= $filterCertificateId ?>"
-                        class="px-4 py-2 border rounded bg-gray-700 text-white">
+                        value="<?= $filterCertificateId ?>" class="px-4 py-2 border rounded bg-gray-700 text-white">
                 </div>
 
                 <div>
@@ -90,7 +87,7 @@ $studentsResult = $conn->query($studentsQuery);
         </form>
 
         <!-- Display Filtered Students -->
-        <table class="w-full mt-4">
+        <table class=" mt-4">
             <tr>
                 <th class="bg-green-500 text-white py-2 px-4">Certificate ID</th>
                 <th class="bg-green-500 text-white py-2 px-4">Name</th>
@@ -121,8 +118,8 @@ $studentsResult = $conn->query($studentsQuery);
             }
             ?>
         </table>
+
     </div>
 </body>
 
 </html>
-

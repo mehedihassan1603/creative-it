@@ -24,8 +24,7 @@ $sql = "INSERT INTO students (certificate_id, name, father_name, mother_name, co
         VALUES ('$certificateId', '$name', '$fatherName', '$motherName', '$courseName', '$batchNumber', '$courseEndDate', '$certificateDate')";
 
 if ($conn->query($sql) === TRUE) {
-    // No output here before the header function
-    header("refresh:2;url=admin.php?page=students"); // Redirect after 2 seconds
+    header("refresh:2;url=admin.php?page=students");
     echo '<div id="success-alert" style="background-color: blue; color: white; margin-top:30px; padding:20px;" class="bg-blue-400 text-white text-xl mt-10 p-4 rounded mt-4">
             <h1>Infomation Add Succcessfully! Wait a second...</h1>
         </div>';

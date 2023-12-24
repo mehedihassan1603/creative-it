@@ -21,17 +21,12 @@ include 'src/QROptions.php';
 
 session_start();
 
-// Check if a style is selected in the dropdown
 if (isset($_GET['style'])) {
     $_SESSION['certificate_style'] = $_GET['style'];
 }
 
-// Get the selected style or set a default style
 $selectedStyle = isset($_SESSION['certificate_style']) ? $_SESSION['certificate_style'] : 'default';
 
-
-
-// Use prepared statement to prevent SQL injection
 $searchId = $_GET['certificate_id'];
 $stmt = $conn->prepare("SELECT * FROM students WHERE certificate_id = ?");
 $stmt->bind_param("s", $searchId);
@@ -52,7 +47,6 @@ if ($result->num_rows > 0) {
     $qrImagePath = 'save/qr_code.png';
     $qrCode->render($qrCodeText, $qrImagePath);
 
-    // HTML and CSS for Certificate Display
     echo "<div style='width: 80%; margin-left: auto; margin-right: auto;'>";
     echo "<h2 style='color: #05613F; background-color: #12EA9C; padding: 5px; border-radius: 10px;'>Certified</h2>";
     echo "<div style='display: flex;'>";
@@ -71,7 +65,6 @@ if ($result->num_rows > 0) {
     echo "</div>";
     echo "</div>";
 
-    //Certificate display section
     echo "<h2 style='text-align:center; margin-top:20px;'>Certificate Display:</h2>";
     echo "<div style='position: relative;'>";
     echo "<div style='display: flex; width: 100%;'>";

@@ -20,18 +20,13 @@ $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
-
-    // Create a new image with the certificate background
     $certificateImage = imagecreatefromjpeg('https://www.certificate.creativeit.xyz/front/images/certificate/certificate5.jpg');
-    $qrcertificateImage = imagecreatefrompng('save/qr_code.png'); // Change imagecreatefromjpeg to imagecreatefrompng
+    $qrcertificateImage = imagecreatefrompng('save/qr_code.png');
 
-    // Set the font color
-    $fontColor = imagecolorallocate($certificateImage, 0, 0, 0); // Black
+    $fontColor = imagecolorallocate($certificateImage, 0, 0, 0);
 
-    // Use a relative path for the font
-    $fontPath = 'Arial/arial.ttf'; // Adjust this path
+    $fontPath = 'Arial/arial.ttf'; 
 
-    // Add text to the certificate image
     imagettftext($certificateImage, 18, 0, 300, 500, $fontColor, $fontPath, "ID No:");
     imagettftext($certificateImage, 18, 0, 300, 530, $fontColor, 'Arial/arial_bold.ttf', "{$row['certificate_id']}");
     imagettftext($certificateImage, 18, 0, 300, 570, $fontColor, $fontPath, "Date of Issue:"); // Change "ID No:" to "Date of Issue:"
@@ -42,14 +37,11 @@ if ($result->num_rows > 0) {
     imagettftext($certificateImage, 16, 0, 530, 590, $fontColor, $fontPath, "completed the {$row['course_name']} course held on 30 August 2021 to 02 March 2022 ");
     imagettftext($certificateImage, 16, 0, 530, 620, $fontColor, $fontPath, "at Creative IT Institute.");
 
-    // Merge the QR code image onto the certificate image
     imagecopy($certificateImage, $qrcertificateImage, 330, 650, 0, 0, imagesx($qrcertificateImage), imagesy($qrcertificateImage));
 
-    // Output the image to the browser
     header('Content-Type: image/jpeg');
     imagejpeg($certificateImage);
 
-    // Free up memory
     imagedestroy($certificateImage);
     imagedestroy($qrcertificateImage);
 } else {

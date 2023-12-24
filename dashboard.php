@@ -21,7 +21,6 @@
 
         .content {
             padding: 20px;
-            max-width: 100%;
             width: 100%;
             color: white;
         }
@@ -143,7 +142,7 @@
 
 <body class="bg-gray-800 text-white">
 
-    <div>
+    <div class="mt-20">
         <nav class="flex justify-center logo-container relative">
             <img class="bg-white w-48 rounded-full" src="uploads/abcdef.png?<?php echo time(); ?>" alt="Logo"
                 width="80px">
@@ -202,7 +201,7 @@
         $studentsResult = $conn->query($studentsQuery);
         ?>
 
-        <div class="state-container">
+        <div class="state-container flex flex-col md:flex-row">
             <div class="statistics-box">
                 <p>Total Number of Records</p>
                 <h3>
@@ -215,17 +214,6 @@
                 <h3>
                     <?php echo $totalCertificates; ?>
                 </h3>
-            </div>
-        </div>
-
-        <div class="flex gap-10 justify-center mt-20">
-            <div
-                class="text-2xl border-2 border-orange-600 rounded-lg px-3 py-2 text-white cursor-pointer hover:bg-red-600 hover:text-white">
-                <a href="admin.php?page=addStudents">Add Student</a>
-            </div>
-            <div
-                class="text-2xl border-2 border-orange-600 rounded-lg px-3 py-2 text-white cursor-pointer hover:bg-red-700 hover:text-white">
-                <a href="admin.php?page=students">View Student</a>
             </div>
         </div>
     </div>
@@ -254,7 +242,7 @@
                 .then(data => {
                     if (data.success) {
                         alert('Logo uploaded successfully!');
-                        location.reload(); // Reload the page
+                        location.reload(); 
                     } else {
                         alert('Error uploading logo. Please try again.');
                     }
@@ -266,8 +254,6 @@
         }
 
         function closeModal() {
-            // Implement logic to close the modal as needed
-            // For example, you can set the dialog attribute 'open' to false
             document.getElementById('my_modal_6').open = false;
         }
 

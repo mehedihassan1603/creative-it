@@ -26,6 +26,5 @@ function generatePDF($imagePath, $overlayText, $outputPath)
     $pdf->Output($outputPath, 'F');
 }
 
-// Example usage
 generatePDF('path/to/your/image.jpg', 'Overlay Text', 'output_fpdf.pdf');
 ?>

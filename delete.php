@@ -10,10 +10,8 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Assuming you receive the student ID through a GET parameter
 $studentId = $_GET['id'];
 
-// Delete the student from the database
 $deleteStudentQuery = "DELETE FROM students WHERE id = $studentId";
 $conn->query($deleteStudentQuery);
 ?>

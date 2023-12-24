@@ -1,44 +1,31 @@
 <?php
 include 'navbar.php';
-
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "creativeit";
-
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
-
 require 'vendor/autoload.php';
 
 include 'src/QRCode.php';
 include 'src/QROptions.php';
 
-
 session_start();
 
-// Check if a style is selected in the dropdown
 if (isset($_GET['style'])) {
     $_SESSION['certificate_style'] = $_GET['style'];
 }
-
-// Get the selected style or set a default style
 $selectedStyle = isset($_SESSION['certificate_style']) ? $_SESSION['certificate_style'] : 'default';
 
-
-
-// Use prepared statement to prevent SQL injection
 $searchId = $_GET['certificate_id'];
 $stmt = $conn->prepare("SELECT * FROM students WHERE certificate_id = ?");
 $stmt->bind_param("s", $searchId);
 $stmt->execute();
-
 $result = $stmt->get_result();
-
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $qrCodeText = "Certificate ID: {$row['certificate_id']}\nName: {$row['name']}";
@@ -52,7 +39,6 @@ if ($result->num_rows > 0) {
     $qrImagePath = 'save/qr_code.png';
     $qrCode->render($qrCodeText, $qrImagePath);
 
-    // HTML and CSS for Certificate Display
     echo "<div style='width: 80%; margin-left: auto; margin-right: auto;'>";
     echo "<h2 style='color: #05613F; background-color: #12EA9C; padding: 5px; border-radius: 10px;'>Certified</h2>";
     echo "<div style='display: flex;'>";
@@ -71,7 +57,6 @@ if ($result->num_rows > 0) {
     echo "</div>";
     echo "</div>";
 
-    //Certificate display section
     echo "<h2 style='text-align:center; margin-top:20px;'>Certificate Display:</h2>";
     echo "<div style='position: relative;'>";
     echo "<img style='width: 100%; margin-left: auto; margin-right: auto;' src='https://www.certificate.creativeit.xyz/front/images/certificate/certificate5.jpg'>";
