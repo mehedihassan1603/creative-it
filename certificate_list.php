@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logo Upload Page</title>
+    <title>Certifacte Upload Page</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -51,7 +51,7 @@
 <body>
 
     <form action="upload_certificate.php" method="post" enctype="multipart/form-data">
-        <h2>Upload Logo</h2>
+        <h2>Upload Certificate</h2>
 
         <label for="logo">Choose a logo:</label>
         <input type="file" id="logo" name="logo" accept="image/*" required>

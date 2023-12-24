@@ -10,9 +10,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         if (move_uploaded_file($_FILES["logo"]["tmp_name"], $uploadPath)) {
-            echo "Logo uploaded successfully.";
+            echo "Certificate uploaded successfully.";
             echo "<br>";
-            echo "Logo path: " . $uploadPath;
+            echo "Certificate path: " . $uploadPath;
         } else {
             echo "Sorry, there was an error uploading your file.";
         }

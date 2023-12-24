@@ -5,102 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        body {
-            width: 80%;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #333;
-            color: #fff;
-            padding: 10px 20px;
-        }
-
-        ul {
-            list-style-type: none;
-            display: flex;
-            margin: 0;
-            padding: 0;
-        }
-
-        li {
-            margin: 0 10px;
-        }
-
-        a {
-            text-decoration: none;
-            font-weight: bold;
-            color: #fff;
-        }
-
-        h2 {
-            margin-top: 40px;
-            text-align: center;
-        }
-
-        form {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-
-        input {
-            padding: 8px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        input[type="text"] {
-            width: 200px;
-        }
-
-        input[type="submit"] {
-            background-color: #4caf50;
-            color: #fff;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
-<body>
-    <nav>
-    <div>
-    <img src="uploads/abcdef.png?<?php echo time(); ?>" alt="Logo" width="80px">
-    </div>
+<body class="bg-gray-100">
+
+    <nav class="flex justify-between items-center bg-gray-800 text-white p-4">
         <div>
-            <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="">About</a></li>
-                <li><a href="">Service</a></li>
-                <li><a href="">Contact</a></li>
+            <img src="uploads/abcdef.png?<?php echo time(); ?>" alt="Logo" width="80px">
+        </div>
+        <div>
+            <ul class="flex">
+                <li class="mr-4"><a href="#" class="text-white">Home</a></li>
+                <li class="mr-4"><a href="#" class="text-white">About</a></li>
+                <li class="mr-4"><a href="#" class="text-white">Service</a></li>
+                <li><a href="#" class="text-white">Contact</a></li>
             </ul>
         </div>
         <div>
-            <button>Login</button>
+            <button class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-red-700"><a href="admin.php" class="text-white">Admin</a></button>
         </div>
     </nav>
 
     <?php
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        
         $selectedSearchType = $_POST['searchType'];
 
         switch ($selectedSearchType) {
@@ -111,7 +39,7 @@
                 $formAction = 'search_sec.php';
                 break;
             default:
-                $formAction = ''; 
+                $formAction = '';
                 break;
         }
     } else {
@@ -119,15 +47,19 @@
     }
     ?>
 
-    <h2>Search by ID:</h2>
-    <form id="searchForm" method="get" action="<?php echo $formAction; ?>">
-        <!-- Your existing form content -->
-        <label for="searchId">Enter ID:</label>
-        <input type="text" id="searchId" name="certificate_id" required>
-        <input type="submit" value="Search">
-    </form>
+    <div class="max-w-md mx-auto bg-white p-8 mt-8">
+        <h2 class="text-2xl font-bold text-center">Search by ID:</h2>
+        <form id="searchForm" method="get" action="<?php echo $formAction; ?>" class="mt-4">
+            <label for="searchId" class="block font-bold mb-2">Enter ID:</label>
+            <input type="text" id="searchId" name="certificate_id" required
+                class="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500">
+            <button type="submit"
+                class="bg-green-500 text-white px-4 py-2 rounded mt-4 hover:bg-green-600 focus:outline-none focus:shadow-outline-green">
+                Search
+            </button>
+        </form>
+    </div>
 
-    
 </body>
 
 </html>

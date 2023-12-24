@@ -89,17 +89,13 @@ if ($conn->connect_error) {
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="admin.php?page=dashboard">Profile</a></li>
-                
-                
+                <li><a href="admin.php?page=add_option">All Courses</a></li>
                 <li><a href="admin.php?page=certificate_list">Certificate List</a></li>
             </ul>
         </div>
         <div class="content">
             <?php
-            // Check if a page is specified in the URL, otherwise default to home
             $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
-
-            // Include the corresponding PHP file based on the selected page
             $filename = $page . '.php';
             if (file_exists($filename)) {
                 include($filename);

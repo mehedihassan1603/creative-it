@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $servername = "localhost";
 $username = "root";
@@ -7,8 +7,8 @@ $dbname = "creativeit";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-if ($conn->connect_error){
-    die("connection failed" . $conn->connect_error);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 
 $certificateId = $_POST['certificate_id'];
@@ -20,15 +20,18 @@ $batchNumber = $_POST['batch_number'];
 $courseEndDate = $_POST['course_end_date'];
 $certificateDate = $_POST['certificate_date'];
 
-
 $sql = "INSERT INTO students (certificate_id, name, father_name, mother_name, course_name, batch_number, course_end_date, certificate_date)
         VALUES ('$certificateId', '$name', '$fatherName', '$motherName', '$courseName', '$batchNumber', '$courseEndDate', '$certificateDate')";
 
-
-if($conn->query($sql)=== TRUE){
-    echo "<h2>Data added Successfully!</h2>";
+if ($conn->query($sql) === TRUE) {
+    // No output here before the header function
+    header("refresh:2;url=admin.php?page=students"); // Redirect after 2 seconds
+    echo '<div id="success-alert" style="background-color: blue; color: white; margin-top:30px; padding:20px;" class="bg-blue-400 text-white text-xl mt-10 p-4 rounded mt-4">
+            <h1>Infomation Add Succcessfully! Wait a second...</h1>
+        </div>';
+    exit();
 } else {
-    echo "Error: ";
+    echo "Error: " . $conn->error;
 }
 
 $conn->close();
