@@ -12,6 +12,7 @@ if ($conn->connect_error) {
 
 $filterCertificateId = isset($_POST['filter_certificate_id']) ? $_POST['filter_certificate_id'] : '';
 $filterCourseName = isset($_POST['filter_course_name']) ? $_POST['filter_course_name'] : '';
+$filterBatchName = isset($_POST['filter_batch_name']) ? $_POST['filter_batch_name'] : '';
 
 $whereClause = "WHERE 1";
 
@@ -21,6 +22,10 @@ if ($filterCertificateId !== '') {
 
 if ($filterCourseName !== '') {
     $whereClause .= " AND course_name = '$filterCourseName'";
+}
+
+if ($filterBatchName !== '') {
+    $whereClause .= " AND batch_number = '$filterBatchName'";
 }
 
 $studentsQuery = "SELECT * FROM students $whereClause";
@@ -74,6 +79,24 @@ $studentsResult = $conn->query($studentsQuery);
                         while ($row = $courseResult->fetch_assoc()) {
                             $selected = ($filterCourseName === $row['course_name']) ? 'selected' : '';
                             echo "<option value='{$row['course_name']}' $selected>{$row['course_name']}</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="filter_batch_name" class="block text-white">Filter by batch Name:</label>
+                    <select id="filter_batch_name" name="filter_batch_name"
+                        class="px-4 py-2 border rounded bg-gray-700 text-white">
+                        <option value="" <?= $filterBatchName === '' ? 'selected' : '' ?>>All</option>
+
+                        <?php
+                        $batchQuery = "SELECT DISTINCT batch_number FROM students";
+                        $batchResult = $conn->query($batchQuery);
+
+                        while ($row = $batchResult->fetch_assoc()) {
+                            $selected = ($filterbatchName === $row['batch_number']) ? 'selected' : '';
+                            echo "<option value='{$row['batch_number']}' $selected>{$row['batch_number']}</option>";
                         }
                         ?>
                     </select>

@@ -11,23 +11,16 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
 if (isset($_POST['login_submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
-
     $sql = "SELECT * FROM `users` WHERE `email`='$email'";
     $result = $conn->query($sql);
-
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $storedPassword = $row['password'];
-
         if ($password === $storedPassword) {
-            // Set the 'email' session variable
             $_SESSION['email'] = $email;
-
-            // Redirect to admin.php
             header("Location: admin.php");
             exit();
         } else {
@@ -42,7 +35,6 @@ if (isset($_POST['login_submit'])) {
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -77,6 +69,10 @@ if (isset($_POST['login_submit'])) {
         <div class="mt-4 text-center">
             <p>Don't have an account? <a href="signup.php" class="text-blue-500">Sign Up</a></p>
         </div>
+        <div class="mt-4 text-center">
+            <p>Forgot your password? <a href="forgot_password.php" class="text-blue-500">Reset Password</a></p>
+        </div>
+
         <div class="flex justify-center">
             <button
                 class="bg-green-500 text-white px-4 py-2 rounded mt-4 hover:bg-red-600 focus:outline-none focus:shadow-outline-blue">

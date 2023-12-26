@@ -1,43 +1,62 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "";
+$dbpassword = "";
 $dbname = "creativeit";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $dbpassword, $dbname);
 
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
 if (isset($_POST['signup_submit'])) {
+    $name = $_POST['name'];
+    $father_name = $_POST['father_name'];
+    $mother_name = $_POST['mother_name'];
+    $course_name = $_POST['course_name'];
+    $batch_number = $_POST['batch_number'];
     $email = $_POST['email'];
-    $password = $_POST['password']; 
+    $user_password = $_POST['password'];
 
-    // Check if the email already exists
-    $checkEmailQuery = "SELECT * FROM `users` WHERE `email`='$email'";
-    $result = $conn->query($checkEmailQuery);
+    // Check if email already exists
+    $check_email_sql = "SELECT * FROM students WHERE email = '$email'";
+    $check_email_result = $conn->query($check_email_sql);
 
-    if ($result->num_rows > 0) {
-        echo '<div id="error-alert" style="background-color: red; color: white; margin-top:30px; padding:10px;" class="bg-red-400 text-white text-xl mt-10 p-4 rounded mt-4">
-                <h1>Email already exists! Please choose another email.</h1>
-            </div>';
-    } else {
-        // Insert new record if the email doesn't exist
-        $sql = "INSERT INTO `users` (`email`, `password`) VALUES ('$email', '$password')";
-
-        if ($conn->query($sql) === TRUE) {
-            header("refresh:2;url=admin.php?page=dashboard");
-            echo '<div id="success-alert" style="background-color: blue; color: white; margin-top:30px; padding:10px;" class="bg-blue-400 text-white text-xl mt-10 p-4 rounded mt-4">
-                    <h1>Account created successfully! Redirecting...</h1>
-                </div>';
-            exit();
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
+    if ($check_email_result->num_rows > 0) {
+        echo "Email already exists. Please choose a different email.";
+        $conn->close();
+        exit();
     }
+
+    // Insert into students table
+    $sql = "INSERT INTO students (name, father_name, mother_name, course_name, batch_number, email, password)
+        VALUES ('$name', '$father_name', '$mother_name', '$course_name', '$batch_number', '$email', '$user_password')";
+
+    // Insert into users table
+    $sql_user = "INSERT INTO users (email, password)
+        VALUES ('$email', '$user_password')";
+
+    if ($conn->query($sql) === TRUE && $conn->query($sql_user) === TRUE) {
+        header("refresh:2;url=index.php");
+        echo '<div id="success-alert" style="background-color: blue; color: white; margin-top:30px; padding:20px;" class="bg-blue-400 text-white text-xl mt-10 p-4 rounded mt-4">
+            <h1>Information Added Successfully! Wait a second...</h1>
+        </div>';
+        
+        exit();
+    } else {
+        echo "Error: " . $conn->error;
+    }
+    $conn->close();
 }
+
+// Fetch courses
+$sql = "SELECT * FROM courses";
+$query = mysqli_query($conn, $sql);
+$sqlb = "SELECT * FROM batches";
+$queryb = mysqli_query($conn, $sqlb);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -63,6 +82,43 @@ if (isset($_POST['signup_submit'])) {
                 <label for="password" class="block text-gray-700 font-bold mb-2">Password:</label>
                 <input type="password" id="password" name="password" required
                     class="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500">
+            </div>
+            <div class="mb-4">
+                <label for="name" class="block text-gray-700 font-bold mb-2">Name:</label>
+                <input type="text" id="name" name="name" required
+                    class="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500">
+            </div>
+
+            <div class="mb-4">
+                <label for="father_name" class="block text-gray-700 font-bold mb-2">Father's Name:</label>
+                <input type="text" id="father_name" name="father_name" required
+                    class="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500">
+            </div>
+            <div class="mb-4">
+                <label for="mother_name" class="block text-gray-700 font-bold mb-2">Mother's Name:</label>
+                <input type="text" id="mother_name" name="mother_name" required
+                    class="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500">
+            </div>
+            <div class="mb-4">
+                <label for="course_name" class="block text-gray-700 font-bold mb-2">Course Name:</label>
+                <select id="course_name" name="course_name" required class="w-full px-4 py-2 mb-4 border rounded">
+                    <?php
+                    while ($row = mysqli_fetch_assoc($query)) {
+                        echo '<option value="' . $row['course_name'] . '">' . $row['course_name'] . '</option>';
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="batch_number" class="block text-gray-700 font-bold mb-2">Batch Name:</label>
+                <select id="batch_number" name="batch_number" required class="w-full px-4 py-2 mb-4 border rounded">
+                    <?php
+                    while ($row = mysqli_fetch_assoc($queryb)) {
+                        echo '<option value="' . $row['batch_name'] . '">' . $row['batch_name'] . '</option>';
+                    }
+                    ?>
+                </select>
+
             </div>
             <button type="submit" name="signup_submit"
                 class="bg-blue-500 text-white px-4 py-2 rounded mt-4 hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue">

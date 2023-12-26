@@ -108,6 +108,9 @@ if (isset($_GET['logout'])) {
                 <li
                     class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
                     <a href="admin.php?page=add_option" class="menu-item">All Courses</a></li>
+                <li
+                    class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
+                    <a href="admin.php?page=add_batch" class="menu-item">All Batches</a></li>
 
                 <div class="dropdown dropdown-right">
                     <li tabindex="0" role=""
@@ -124,6 +127,10 @@ if (isset($_GET['logout'])) {
                     </ul>
                 </div>
 
+                <li
+                    class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
+                    <a href="admin.php?page=users" class="menu-item">Users</a></li>
+                <li
                 <li
                     class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
                     <a href="admin.php?page=certificate_list" class="menu-item">New Certificate</a></li>

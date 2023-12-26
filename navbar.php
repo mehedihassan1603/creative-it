@@ -12,6 +12,6 @@
         </ul>
     </div>
     <div>
-            <button style="background-color: orange; padding: 12px;"><a href="admin.php" class="text-white">Admin</a></button>
-        </div>
+        <button style="background-color: orange; padding: 12px;"><a href="studentLogout.php" class="text-white">Logout</a></button>
+    </div>
 </nav>

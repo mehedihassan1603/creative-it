@@ -1,0 +1,121 @@
+Connection: opening to smtp.gmail.com:587, timeout=300, options=array()Connection: openedSERVER -> CLIENT: 220 smtp.gmail.com ESMTP u7-20020a62ed07000000b006d99e005ea6sm3884902pfh.160 - gsmtp
+CLIENT -> SERVER: EHLO localhost
+SERVER -> CLIENT: 250-smtp.gmail.com at your service, [203.96.227.214]
+250-SIZE 35882577
+250-8BITMIME
+250-STARTTLS
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+CLIENT -> SERVER: STARTTLS
+SERVER -> CLIENT: 220 2.0.0 Ready to start TLS
+CLIENT -> SERVER: EHLO localhost
+SERVER -> CLIENT: 250-smtp.gmail.com at your service, [203.96.227.214]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+CLIENT -> SERVER: AUTH LOGIN
+SERVER -> CLIENT: 334 VXNlcm5hbWU6
+CLIENT -> SERVER: [credentials hidden]SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+CLIENT -> SERVER: [credentials hidden]SERVER -> CLIENT: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials u7-20020a62ed07000000b006d99e005ea6sm3884902pfh.160 - gsmtp
+SMTP ERROR: Password command failed: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials u7-20020a62ed07000000b006d99e005ea6sm3884902pfh.160 - gsmtp
+SMTP Error: Could not authenticate.CLIENT -> SERVER: QUIT
+SERVER -> CLIENT: 221 2.0.0 closing connection u7-20020a62ed07000000b006d99e005ea6sm3884902pfh.160 - gsmtp
+Connection: closedSMTP Error: Could not authenticate.Connection: opening to smtp.gmail.com:587, timeout=300, options=array()Connection: openedSERVER -> CLIENT: 220 smtp.gmail.com ESMTP b11-20020a170902a9cb00b001d40f1e0192sm6947361plr.299 - gsmtp
+CLIENT -> SERVER: EHLO localhost
+SERVER -> CLIENT: 250-smtp.gmail.com at your service, [203.96.227.214]
+250-SIZE 35882577
+250-8BITMIME
+250-STARTTLS
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+CLIENT -> SERVER: STARTTLS
+SERVER -> CLIENT: 220 2.0.0 Ready to start TLS
+CLIENT -> SERVER: EHLO localhost
+SERVER -> CLIENT: 250-smtp.gmail.com at your service, [203.96.227.214]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+CLIENT -> SERVER: AUTH LOGIN
+SERVER -> CLIENT: 334 VXNlcm5hbWU6
+CLIENT -> SERVER: [credentials hidden]SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+CLIENT -> SERVER: [credentials hidden]SERVER -> CLIENT: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials b11-20020a170902a9cb00b001d40f1e0192sm6947361plr.299 - gsmtp
+SMTP ERROR: Password command failed: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials b11-20020a170902a9cb00b001d40f1e0192sm6947361plr.299 - gsmtp
+SMTP Error: Could not authenticate.CLIENT -> SERVER: QUIT
+SERVER -> CLIENT: 221 2.0.0 closing connection b11-20020a170902a9cb00b001d40f1e0192sm6947361plr.299 - gsmtp
+Connection: closedSMTP Error: Could not authenticate.Connection: opening to smtp.gmail.com:587, timeout=300, options=array()Connection: openedSERVER -> CLIENT: 220 smtp.gmail.com ESMTP 13-20020a170902ee4d00b001d3c0074f33sm7835364plo.170 - gsmtp
+CLIENT -> SERVER: EHLO localhost
+SERVER -> CLIENT: 250-smtp.gmail.com at your service, [203.96.227.214]
+250-SIZE 35882577
+250-8BITMIME
+250-STARTTLS
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+CLIENT -> SERVER: STARTTLS
+SERVER -> CLIENT: 220 2.0.0 Ready to start TLS
+CLIENT -> SERVER: EHLO localhost
+SERVER -> CLIENT: 250-smtp.gmail.com at your service, [203.96.227.214]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+CLIENT -> SERVER: AUTH LOGIN
+SERVER -> CLIENT: 334 VXNlcm5hbWU6
+CLIENT -> SERVER: [credentials hidden]SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+CLIENT -> SERVER: [credentials hidden]SERVER -> CLIENT: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials 13-20020a170902ee4d00b001d3c0074f33sm7835364plo.170 - gsmtp
+SMTP ERROR: Password command failed: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials 13-20020a170902ee4d00b001d3c0074f33sm7835364plo.170 - gsmtp
+SMTP Error: Could not authenticate.CLIENT -> SERVER: QUIT
+SERVER -> CLIENT: 221 2.0.0 closing connection 13-20020a170902ee4d00b001d3c0074f33sm7835364plo.170 - gsmtp
+Connection: closedSMTP Error: Could not authenticate.Connection: opening to smtp.gmail.com:587, timeout=300, options=array()Connection: openedSERVER -> CLIENT: 220 smtp.gmail.com ESMTP d9-20020a62f809000000b006d9aa51f0a3sm3355066pfh.171 - gsmtp
+CLIENT -> SERVER: EHLO localhost
+SERVER -> CLIENT: 250-smtp.gmail.com at your service, [203.96.227.214]
+250-SIZE 35882577
+250-8BITMIME
+250-STARTTLS
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+CLIENT -> SERVER: STARTTLS
+SERVER -> CLIENT: 220 2.0.0 Ready to start TLS
+CLIENT -> SERVER: EHLO localhost
+SERVER -> CLIENT: 250-smtp.gmail.com at your service, [203.96.227.214]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+CLIENT -> SERVER: AUTH LOGIN
+SERVER -> CLIENT: 334 VXNlcm5hbWU6
+CLIENT -> SERVER: [credentials hidden]SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+CLIENT -> SERVER: [credentials hidden]SERVER -> CLIENT: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9-20020a62f809000000b006d9aa51f0a3sm3355066pfh.171 - gsmtp
+SMTP ERROR: Password command failed: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9-20020a62f809000000b006d9aa51f0a3sm3355066pfh.171 - gsmtp
+SMTP Error: Could not authenticate.CLIENT -> SERVER: QUIT
+SERVER -> CLIENT: 221 2.0.0 closing connection d9-20020a62f809000000b006d9aa51f0a3sm3355066pfh.171 - gsmtp
+Connection: closedSMTP Error: Could not authenticate.

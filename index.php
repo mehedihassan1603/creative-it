@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.24/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
 
 <body class="bg-gray-100">
@@ -22,8 +25,15 @@
                 <li><a href="#" class="text-white">Contact</a></li>
             </ul>
         </div>
-        <div>
+        <!-- <div>
             <button class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-red-700"><a href="admin.php" class="text-white">Admin</a></button>
+        </div> -->
+        <div class="dropdown dropdown-end">
+            <div tabindex="0" role="button" class="bg-orange-600 px-4 py-2 rounded-lg m-1 hover:bg-orange-700">Login</div>
+            <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-gray-200 text-black rounded-box w-52">
+                <li><a href="admin.php">Admin Login</a></li>
+                <li><a href="studentLogin.php">Student Login</a></li>
+            </ul>
         </div>
     </nav>
 
@@ -39,7 +49,7 @@
                 $formAction = 'search_sec.php';
                 break;
             default:
-                
+
                 $formAction = '';
                 break;
         }
