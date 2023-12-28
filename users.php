@@ -11,7 +11,7 @@ if ($conn->connect_error) {
 }
 
 
-$usersQuery = "SELECT id, name, email, father_name, mother_name FROM students";
+$usersQuery = "SELECT id, name, email, password FROM students";
 $usersResult = $conn->query($usersQuery);
 ?>
 
@@ -35,8 +35,8 @@ $usersResult = $conn->query($usersQuery);
                 <th class="bg-green-500 text-white py-2 px-4">Serial Number</th>
                 <th class="bg-green-500 text-white py-2 px-4">Name</th>
                 <th class="bg-green-500 text-white py-2 px-4">Email</th>
-                <th class="bg-green-500 text-white py-2 px-4">Father's Name</th>
-                <th class="bg-green-500 text-white py-2 px-4">Mother's Name</th>
+                <th class="bg-green-500 text-white py-2 px-4">Password</th>
+                <th class="bg-green-500 text-white py-2 px-4">Edit</th>
                 <th class="bg-green-500 text-white py-2 px-4">Delete</th>
             </tr>
 
@@ -48,9 +48,9 @@ $usersResult = $conn->query($usersQuery);
                 echo "<td class='py-2 px-4'>" . $serialNumber . "</td>";
                 echo "<td class='py-2 px-4'>" . $row['name'] . "</td>";
                 echo "<td class='py-2 px-4'>" . $row['email'] . "</td>";
-                echo "<td class='py-2 px-4'>" . $row['father_name'] . "</td>";
-                echo "<td class='py-2 px-4'>" . $row['mother_name'] . "</td>";
-                echo "<td class='py-2 px-4'><a href='delete.php?id={$row['id']}'>Delete</a></td>"; // Assuming 'id' is the primary key
+                echo "<td class='py-2 px-4'>" . $row['password'] . "</td>";
+                echo "<td class='py-2 px-4'><a class='text-white p-2 rounded-lg hover:bg-slate-700' href='edit.php?id={$row['id']}'>Edit</a></td>";
+                echo "<td class='py-2 px-4'><a class='text-white p-2 rounded-lg hover:bg-slate-700' href='delete.php?id={$row['id']}'>Delete</a></td>"; // Assuming 'id' is the primary key
                 echo "</tr>";
 
                 $serialNumber++;

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@4.4.20/dist/full.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" />
     <script src="https://kit.fontawesome.com/72d0103d4a.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -185,9 +186,11 @@
 
         </div>
     </div>
+    
 
     <div class="content">
         <?php
+        // Your PHP code for retrieving data here...
 
         $totalRecordsQuery = "SELECT COUNT(*) as total_records FROM students";
         $totalRecordsResult = $conn->query($totalRecordsQuery);
@@ -196,29 +199,28 @@
         $totalCertificatesQuery = "SELECT COUNT(DISTINCT certificate_id) as total_certificates FROM students";
         $totalCertificatesResult = $conn->query($totalCertificatesQuery);
         $totalCertificates = $totalCertificatesResult->fetch_assoc()['total_certificates'];
-
-        $studentsQuery = "SELECT * FROM students";
-        $studentsResult = $conn->query($studentsQuery);
         ?>
 
-        <div class="state-container flex flex-col md:flex-row">
+        <div class="state-container flex flex-col md:flex-row gap-20 my-10">
             <div class="statistics-box">
                 <p>Total Number of Records</p>
-                <h3>
-                    <?php echo $totalRecords; ?>
-                </h3>
+                <h3><?php echo $totalRecords; ?></h3>
             </div>
 
             <div class="statistics-box">
                 <p>Total Number of Certificates</p>
-                <h3>
-                    <?php echo $totalCertificates; ?>
-                </h3>
+                <h3><?php echo $totalCertificates; ?></h3>
             </div>
         </div>
-    </div>
 
-    <form class="text-black" id="searchForm" method="post" action="index.php">
+        <div class="bg-white">
+            <h1 class="text-white py-2 bg-violet-600 text-3xl text-center">Statistics Bar:</h1>
+            <canvas id="statisticsChart" width="100" height="50"></canvas>
+        </div>
+    </div>
+    
+
+    <!-- <form class="text-black" id="searchForm" method="post" action="index.php">
         <label for="searchType">Select Search Type:</label>
         <select id="searchType" name="searchType" onchange="toggleSubmitButton()"
             class="bg-white p-2 border rounded">
@@ -228,7 +230,7 @@
         </select>
         <input type="submit" value="OK" id="submitButton" disabled
             class="bg-green-500 text-white p-2 ml-2 rounded cursor-pointer">
-    </form>
+    </form> -->
 
     <script>
         function uploadLogo() {
@@ -267,6 +269,36 @@
                 submitButton.setAttribute("disabled", "disabled");
             }
         }
+
+       
+        var ctx = document.getElementById('statisticsChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Total Records', 'Total Certificates'],
+                datasets: [{
+                    label: 'Statistics',
+                    data: [<?php echo $totalRecords; ?>, <?php echo $totalCertificates; ?>],
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(255, 99, 132, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 99, 132, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    
 
     </script>
 </body>

@@ -1,18 +1,11 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "creativeit";
+$conn=mysqli_connect('localhost','root','','creativeit');
 
-$conn = new mysqli($servername, $username, $password, $dbname);
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-$filterCertificateId = isset($_POST['filter_certificate_id']) ? $_POST['filter_certificate_id'] : '';
-$filterCourseName = isset($_POST['filter_course_name']) ? $_POST['filter_course_name'] : '';
-$filterBatchName = isset($_POST['filter_batch_name']) ? $_POST['filter_batch_name'] : '';
+$filterCertificateId = isset($_POST['filter_certificate_id']) ? mysqli_real_escape_string($conn, $_POST['filter_certificate_id']) : '';
+$filterCourseName = isset($_POST['filter_course_name']) ? mysqli_real_escape_string($conn, $_POST['filter_course_name']) : '';
+$filterBatchName = isset($_POST['filter_batch_name']) ? mysqli_real_escape_string($conn, $_POST['filter_batch_name']) : '';
+$filterCertificate = isset($_POST['filter_certificate']) ? mysqli_real_escape_string($conn, $_POST['filter_certificate']) : '';
 
 $whereClause = "WHERE 1";
 
@@ -28,25 +21,53 @@ if ($filterBatchName !== '') {
     $whereClause .= " AND batch_number = '$filterBatchName'";
 }
 
-$studentsQuery = "SELECT * FROM students $whereClause";
-$studentsResult = $conn->query($studentsQuery);
-?>
+if ($filterCertificate === 'with_certificate') {
+    $whereClause .= " AND certificate_id IS NOT NULL AND certificate_id <> ''";
+} elseif ($filterCertificate === 'without_certificate') {
+    $whereClause .= " AND (certificate_id IS NULL OR certificate_id = '')";
+}
 
+
+$per_page=5;
+$start=0;
+$current_page=1;
+if(isset($_GET['start'])){
+	$start=$_GET['start'];
+	if($start<=0){
+		$start=0;
+		$current_page=1;
+	}else{
+		$current_page=$start;
+		$start--;
+		$start=$start*$per_page;
+	}
+}
+// Modify the main query to include the WHERE clause
+$sql = "SELECT * FROM students $whereClause LIMIT $start, $per_page";
+$res = mysqli_query($conn, $sql);
+
+$record = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM students $whereClause"));
+$pagi = ceil($record / $per_page);
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Students Information</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@4.4.20/dist/full.min.css" />
+  <title>Pagination Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@4.4.20/dist/full.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" />
+  
+  <style>
+  .mt-100{margin-top:50px;}
+  .mt-30{margin-top:30px;}
+  .mb-30{margin-bottom:30px;}
+  </style>
 </head>
-
 <body class="bg-gray-800 text-white">
-
-    <div class="container mx-auto p-8">
-        <?php
+<div class="container w-11/12 mx-auto p-8">
+<?php
         $totalRecordsQuery = "SELECT COUNT(*) as total_records FROM students";
         $totalRecordsResult = $conn->query($totalRecordsQuery);
         $totalRecords = $totalRecordsResult->fetch_assoc()['total_records'];
@@ -59,15 +80,16 @@ $studentsResult = $conn->query($studentsQuery);
 
         <!-- Filter Form -->
         <form method="post" class="mt-8 mb-4 bg-gray-500 text-center">
+            <h1 class="text-2xl mb-4">Filter students:</h1>
             <div class="flex flex-col md:flex-row justify-center space-x-4">
                 <div>
-                    <label for="filter_certificate_id" class="block text-white">Filter by Certificate ID:</label>
+                    <label for="filter_certificate_id" class="block text-white">by Certificate ID:</label>
                     <input type="text" id="filter_certificate_id" name="filter_certificate_id"
                         value="<?= $filterCertificateId ?>" class="px-4 py-2 border rounded bg-gray-700 text-white">
                 </div>
 
                 <div>
-                    <label for="filter_course_name" class="block text-white">Filter by Course Name:</label>
+                    <label for="filter_course_name" class="block text-white">by Course Name:</label>
                     <select id="filter_course_name" name="filter_course_name"
                         class="px-4 py-2 border rounded bg-gray-700 text-white">
                         <option value="" <?= $filterCourseName === '' ? 'selected' : '' ?>>All</option>
@@ -85,7 +107,7 @@ $studentsResult = $conn->query($studentsQuery);
                 </div>
 
                 <div>
-                    <label for="filter_batch_name" class="block text-white">Filter by batch Name:</label>
+                    <label for="filter_batch_name" class="block text-white">by batch Name:</label>
                     <select id="filter_batch_name" name="filter_batch_name"
                         class="px-4 py-2 border rounded bg-gray-700 text-white">
                         <option value="" <?= $filterBatchName === '' ? 'selected' : '' ?>>All</option>
@@ -95,10 +117,20 @@ $studentsResult = $conn->query($studentsQuery);
                         $batchResult = $conn->query($batchQuery);
 
                         while ($row = $batchResult->fetch_assoc()) {
-                            $selected = ($filterbatchName === $row['batch_number']) ? 'selected' : '';
+                            $selected = ($filterBatchName === $row['batch_number']) ? 'selected' : '';
                             echo "<option value='{$row['batch_number']}' $selected>{$row['batch_number']}</option>";
                         }
                         ?>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="filter_certificate" class="block text-white">by Certificate:</label>
+                    <select id="filter_certificate" name="filter_certificate"
+                        class="px-4 py-2 border rounded bg-gray-700 text-white">
+                        <option value="" <?= $filterCertificate === '' ? 'selected' : '' ?>>All</option>
+                        <option value="with_certificate" <?= $filterCertificate === 'with_certificate' ? 'selected' : '' ?>>With Certificate</option>
+                        <option value="without_certificate" <?= $filterCertificate === 'without_certificate' ? 'selected' : '' ?>>Without Certificate</option>
                     </select>
                 </div>
 
@@ -109,40 +141,64 @@ $studentsResult = $conn->query($studentsQuery);
             </div>
         </form>
 
+
         <!-- Display Filtered Students -->
-        <table class=" mt-4">
-            <tr>
-                <th class="bg-green-500 text-white py-2 px-4">Certificate ID</th>
-                <th class="bg-green-500 text-white py-2 px-4">Name</th>
-                <th class="bg-green-500 text-white py-2 px-4">Father's Name</th>
-                <th class="bg-green-500 text-white py-2 px-4">Mother's Name</th>
-                <th class="bg-green-500 text-white py-2 px-4">Course Name</th>
-                <th class="bg-green-500 text-white py-2 px-4">Batch Number</th>
-                <th class="bg-green-500 text-white py-2 px-4">Course End Date</th>
-                <th class="bg-green-500 text-white py-2 px-4">Certificate Date</th>
-                <th class="bg-green-500 text-white py-2 px-4">Edit</th>
-                <th class="bg-green-500 text-white py-2 px-4">Delete</th>
-            </tr>
+        <table class="mt-4 w-ful border border-green-500 w-full overflow-auto">
+            <thead>
+                <tr class="bg-green-500 text-white">
+                    <th class="py-2 px-1">Certificate ID</th>
+                    <th class="py-2 px-1">Name</th>
+                    <th class="py-2 px-1">Father's Name</th>
+                    <th class="py-2 px-1">Mother's Name</th>
+                    <th class="py-2 px-1">Course Name</th>
+                    <th class="py-2 px-1">Batch Number</th>
+                    <th class="py-2 px-1">Course End Date</th>
+                    <th class="py-2 px-1">Certificate Date</th>
+                    <th class="py-2 px-1">Edit</th>
+                    <th class="py-2 px-1">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
 
-            <?php
-            while ($row = $studentsResult->fetch_assoc()) {
-                echo "<tr>";
-                echo "<td class='py-2 px-4'>" . $row['certificate_id'] . "</td>";
-                echo "<td class='py-2 px-4'>" . $row['name'] . "</td>";
-                echo "<td class='py-2 px-4'>" . $row['father_name'] . "</td>";
-                echo "<td class='py-2 px-4'>" . $row['mother_name'] . "</td>";
-                echo "<td class='py-2 px-4'>" . $row['course_name'] . "</td>";
-                echo "<td class='py-2 px-4'>" . $row['batch_number'] . "</td>";
-                echo "<td class='py-2 px-4'>" . $row['course_end_date'] . "</td>";
-                echo "<td class='py-2 px-4'>" . $row['certificate_date'] . "</td>";
-                echo "<td class='py-2 px-4'><a href='edit.php?id={$row['id']}'>Edit</a></td>";
-                echo "<td class='py-2 px-4'><a href='delete.php?id={$row['id']}'>Delete</a></td>";
-                echo "</tr>";
-            }
-            ?>
+                <?php
+                $rowColor = 0; 
+                while ($row = $res->fetch_assoc()) {
+                    $rowColorClass = ($rowColor++ % 2 == 0) ? 'bg-cyan-600' : 'bg-pink-600';
+                    echo "<tr class='text-white $rowColorClass'>";
+                    echo "<td class='py-2 px-1'>" . $row['certificate_id'] . "</td>";
+                    echo "<td class='py-2 px-1'>" . $row['name'] . "</td>";
+                    echo "<td class='py-2 px-1'>" . $row['father_name'] . "</td>";
+                    echo "<td class='py-2 px-1'>" . $row['mother_name'] . "</td>";
+                    echo "<td class='py-2 px-1'>" . $row['course_name'] . "</td>";
+                    echo "<td class='py-2 px-1'>" . $row['batch_number'] . "</td>";
+                    echo "<td class='py-2 px-1'>" . $row['course_end_date'] . "</td>";
+                    echo "<td class='py-2 px-1'>" . $row['certificate_date'] . "</td>";
+                    echo "<td class='py-2 px-1'><a href='edit.php?id={$row['id']}' class='text-white p-4 rounded-lg hover:bg-slate-700'>Edit</a></td>";
+                    echo "<td class='py-2 px-1'><a href='delete.php?id={$row['id']}' class='text-white p-4 rounded-lg hover:bg-slate-700'>Delete</a></td>";
+                    echo "</tr>";
+                }
+                ?>
+            </tbody>
         </table>
-
+		<ul class="pagination mt-30">
+	<?php 
+	for($i=1;$i<=$pagi;$i++){
+	$class='';
+	if($current_page==$i){
+		?><li class="page-item active"><a class="page-link" href="javascript:void(0)"><?php echo $i?></a></li><?php
+	}else{
+	?>
+		<li class="page-item"><a class="page-link" href="?start=<?php echo $i?>"><?php echo $i?></a></li>
+	<?php
+	}
+	?>
+    
+	<?php } ?>
+  </ul>
     </div>
-</body>
 
+
+</body>
 </html>
+
+    

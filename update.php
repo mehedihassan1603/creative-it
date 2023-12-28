@@ -19,6 +19,8 @@ $updatedCourseName = $_POST['course_name'];
 $updatedBatchNumber = $_POST['batch_number'];
 $updatedCourseEndDate = $_POST['course_end_date'];
 $updatedCertificateDate = $_POST['certificate_date'];
+$updatedEmail = $_POST['email'];
+$updatedPassword = $_POST['password']; 
 
 $updateStudentQuery = "UPDATE students SET
     certificate_id = '$updatedCertificateId',
@@ -28,7 +30,9 @@ $updateStudentQuery = "UPDATE students SET
     course_name = '$updatedCourseName',
     batch_number = '$updatedBatchNumber',
     course_end_date = '$updatedCourseEndDate',
-    certificate_date = '$updatedCertificateDate'
+    certificate_date = '$updatedCertificateDate',
+    `email` = '$updatedEmail',
+    `password` = '$updatedPassword'
     WHERE id = $studentId";
 
 $conn->query($updateStudentQuery);
@@ -49,7 +53,7 @@ $conn->query($updateStudentQuery);
     <div class="bg-white p-8 rounded shadow-md max-w-md w-full">
         <h3 class="text-2xl font-bold mb-4">Student Details Updated</h3>
         <p class="text-gray-700 mb-4">The student details have been successfully updated.</p>
-        <a href="admin.php?page=students" class="text-blue-500 hover:underline">Back to Students List</a>
+        <a href="/cit/admin.php" class="text-blue-500 hover:underline">Back to Profile</a>
     </div>
 
 </body>

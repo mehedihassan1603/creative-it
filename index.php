@@ -1,3 +1,10 @@
+<?php
+session_start();
+
+$reviews = isset($_SESSION['reviews']) ? $_SESSION['reviews'] : array();
+$teamMembers = isset($_SESSION['teamMembers']) ? $_SESSION['teamMembers'] : array();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,24 +26,21 @@
         </div>
         <div>
             <ul class="flex">
-                <li class="mr-4"><a href="#" class="text-white">Home</a></li>
-                <li class="mr-4"><a href="#" class="text-white">About</a></li>
-                <li class="mr-4"><a href="#" class="text-white">Service</a></li>
-                <li><a href="#" class="text-white">Contact</a></li>
+                <li class="mr-4"><a href="index.php" class="text-white">Home</a></li>
+                <li class="mr-4"><a href="view_about_us.php" class="text-white">About</a></li>
+                <li class="mr-4"><a href="result.php" class="text-white">Find Result</a></li>
             </ul>
         </div>
-        <!-- <div>
-            <button class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-red-700"><a href="admin.php" class="text-white">Admin</a></button>
-        </div> -->
-        <div class="dropdown dropdown-end">
-            <div tabindex="0" role="button" class="bg-orange-600 px-4 py-2 rounded-lg m-1 hover:bg-orange-700">Login</div>
-            <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-gray-200 text-black rounded-box w-52">
-                <li><a href="admin.php">Admin Login</a></li>
-                <li><a href="studentLogin.php">Student Login</a></li>
-            </ul>
+        <div class="">
+            <div tabindex="0" role="button" class="bg-orange-600 px-4 py-2 rounded-lg m-1 hover:bg-orange-700"><a
+                    href="studentLogin.php">Login</a></div>
         </div>
     </nav>
+    <?php
+    include 'banner.php';
+    ?>
 
+    
     <?php
     $formAction = '';
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -56,19 +60,35 @@
     }
     ?>
 
-    <div class="max-w-md mx-auto bg-white p-8 mt-8">
-        <h2 class="text-2xl font-bold text-center">Search by ID:</h2>
-        <form id="searchForm" method="get" action="search.php" class="mt-4">
-            <label for="searchId" class="block font-bold mb-2">Enter ID:</label>
-            <input type="text" id="searchId" name="certificate_id" required
-                class="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500">
-            <button type="submit"
-                class="bg-green-500 text-white px-4 py-2 rounded mt-4 hover:bg-green-600 focus:outline-none focus:shadow-outline-green">
-                Search
-            </button>
-        </form>
+<div class="container mx-auto p-8">
+        <h2 class="text-3xl text-center font-bold mb-4">About Us</h2>
+        <?php
+        foreach ($teamMembers as $member) {
+            echo "<div class='bg-gray-300 p-4 mb-4 shadow-md rounded-md'>";
+            echo "<h3 class='text-xl font-bold mb-2'>{$member['name']}</h3>";
+            echo "<p class='text-gray-600 mb-2'>{$member['position']}</p>";
+            echo "<p>{$member['bio']}</p>";
+            echo "</div>";
+        }
+        ?>
     </div>
 
+<div class="container mx-auto p-8">
+        <h2 class="text-3xl text-center font-bold mb-4">Reviews</h2>
+        <?php
+        foreach ($reviews as $review) {
+            echo "<div class='bg-gray-300 p-4 mb-4 shadow-md rounded-md'>";
+            echo "<h3 class='text-xl font-bold mb-2'>{$review['author']}</h3>";
+            echo "<p class='text-gray-600 mb-2'>{$review['position']}</p>";
+            echo "<p>{$review['content']}</p>";
+            echo "</div>";
+        }
+        ?>
+    </div>
+
+    <?php
+    include 'footer.php';
+    ?>
 </body>
 
 </html>
