@@ -20,7 +20,7 @@ if (isset($_GET['token'])) {
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        // Token is valid, allow the user to reset their password
+        
         if (isset($_POST['reset_submit'])) {
             $new_password = $_POST['new_password'];
             $confirm_password = $_POST['confirm_password'];
@@ -28,9 +28,8 @@ if (isset($_GET['token'])) {
             if ($new_password === $confirm_password) {
                 $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
 
-                // Update the user's password and reset the token
                 $row = $result->fetch_assoc();
-                $user_id = $row['user_id']; // Replace 'user_id' with your actual user ID column name
+                $user_id = $row['user_id'];
                 $sql_update = "UPDATE `users` SET `password`='$hashed_password', `reset_token`=NULL WHERE `user_id`='$user_id'";
                 $result_update = $conn->query($sql_update);
 
@@ -50,9 +49,6 @@ if (isset($_GET['token'])) {
     }
 }
 ?>
-<!-- ... (rest of the HTML code remains unchanged) -->
-
-<!-- ... (rest of the HTML code remains unchanged) -->
 
 
 <!DOCTYPE html>

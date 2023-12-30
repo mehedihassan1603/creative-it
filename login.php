@@ -69,9 +69,6 @@ if (isset($_POST['login_submit'])) {
         <div class="mt-4 text-center">
             <p>Don't have an account? <a href="signup.php" class="text-blue-500">Sign Up</a></p>
         </div>
-        <div class="mt-4 text-center">
-            <p>Forgot your password? <a href="forgot_password.php" class="text-blue-500">Reset Password</a></p>
-        </div>
 
         <div class="flex justify-center">
             <button

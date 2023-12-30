@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Check if the user is not logged in, redirect to the login page
 if (!isset($_SESSION['email'])) {
     header("Location: studentLogin.php");
     exit();
@@ -18,7 +17,6 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Retrieve student information based on the logged-in user's email
 $email = $_SESSION['email'];
 $sql = "SELECT * FROM `students` WHERE `email`='$email'";
 $result = $conn->query($sql);
@@ -31,8 +29,7 @@ if ($result->num_rows > 0) {
     $email = $row['email'];
     $certificateId = $row['certificate_id'];
 } else {
-    // If for some reason the user's information is not found, you can handle it here
-    // For example, redirect to the login page
+    
     header("Location: studentLogin.php");
     exit();
 }

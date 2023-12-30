@@ -13,22 +13,42 @@
 
 <body class="bg-gray-100">
 
-    <nav class="flex justify-between items-center bg-gray-800 text-white p-4">
-        <div>
-            <img src="uploads/abcdef.png?<?php echo time(); ?>" alt="Logo" width="80px">
+<div class="navbar bg-gray-900 p-4 w-full md:w-52">
+        <div class="navbar-start">
+            <div class="hidden md:block">
+                <img src="uploads/abcdef.png?<?php echo time(); ?>" alt="Logo" width="80px">
+            </div>
+            <div class="dropdown">
+                <div tabindex="0" role="button"
+                    class="bg-gray-400 p-4 rounded-lg hover:border-2 hover:border-white md:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h8m-8 6h16" />
+                    </svg>
+                </div>
+                <ul tabindex="0"
+                    class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-black rounded-box w-52">
+                    <li class="mr-4"><a href="index.php" class="text-white bg-slate-700">Home</a></li>
+                    <li class="mr-4"><a href="view_about_us.php" class="text-white">About</a></li>
+                    <li class="mr-4"><a href="view_reviews.php" class="text-white">Reviews</a></li>
+                    <li class="mr-4"><a href="result.php" class="text-white">Find Result</a></li>
+                </ul>
+            </div>
         </div>
-        <div>
-            <ul class="flex">
-            <li class="mr-4"><a href="index.php" class="text-white">Home</a></li>
+        <div class="navbar-center hidden md:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li class="mr-4"><a href="index.php" class="text-white">Home</a></li>
                 <li class="mr-4"><a href="view_about_us.php" class="text-white">About</a></li>
+                <li class="mr-4"><a href="view_reviews.php" class="text-white">Reviews</a></li>
+                <li class="mr-4"><a href="result.php" class="text-white">Find Result</a></li>
             </ul>
         </div>
-       
-        <div class="">
+        <div class="navbar-end">
             <div tabindex="0" role="button" class="bg-orange-600 px-4 py-2 rounded-lg m-1 hover:bg-orange-700"><a
                     href="studentLogin.php">Login</a></div>
         </div>
-    </nav>
+    </div>
 
     <div>
         <h1 class="text-white bg-slate-700 text-center rounded-lg py-3 text-2xl">Search by ID:</h1>

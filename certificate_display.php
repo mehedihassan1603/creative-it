@@ -1,4 +1,3 @@
-<!-- certificate_display.php -->
 
 <h2 style='text-align:center; margin-top:20px;'>Certificate Display:</h2>
 <div style='position: relative;'>

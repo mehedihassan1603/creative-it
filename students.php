@@ -42,7 +42,6 @@ if(isset($_GET['start'])){
 		$start=$start*$per_page;
 	}
 }
-// Modify the main query to include the WHERE clause
 $sql = "SELECT * FROM students $whereClause LIMIT $start, $per_page";
 $res = mysqli_query($conn, $sql);
 
@@ -78,7 +77,6 @@ $pagi = ceil($record / $per_page);
         ?>
         <h3 class="text-3xl text-center mt-4">Students Information</h3>
 
-        <!-- Filter Form -->
         <form method="post" class="mt-8 mb-4 bg-gray-500 text-center">
             <h1 class="text-2xl mb-4">Filter students:</h1>
             <div class="flex flex-col md:flex-row justify-center space-x-4">
@@ -142,7 +140,6 @@ $pagi = ceil($record / $per_page);
         </form>
 
 
-        <!-- Display Filtered Students -->
         <table class="mt-4 w-ful border border-green-500 w-full overflow-auto">
             <thead>
                 <tr class="bg-green-500 text-white">

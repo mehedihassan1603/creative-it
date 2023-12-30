@@ -39,16 +39,16 @@ if ($result->num_rows > 0) {
     $qrImagePath = 'save/qr_code.png';
     $qrCode->render($qrCodeText, $qrImagePath);
 
-    echo "<div style='width: 80%; margin-left: auto; margin-right: auto;'>";
-    echo "<h2 style='color: #05613F; background-color: #12EA9C; padding: 5px; border-radius: 10px;'>Certified</h2>";
+    echo "<div class='text-xl mt-5 space-y-2 font-bold' style='width: 80%; margin-left: auto; margin-right: auto;'>";
+    echo "<h2 class='pl-10 py-2' style='color: #00000; background-color: #12EA9C; border-radius: 10px;'>Certified</h2>";
     echo "<div style='display: flex;'>";
-    echo "<div style='width: 50%; padding-left:40px;'>";
+    echo "<div class='space-y-2' style='width: 50%; padding-left:40px;'>";
     echo "<h4>Certificate ID: {$row['certificate_id']}</h4>";
     echo "<h4>Name: {$row['name']}</h4>";
     echo "<h4>Father's Name: {$row['father_name']}</h4>";
     echo "<h4>Mother's Name: {$row['mother_name']}</h4>";
     echo "</div>";
-    echo "<div style='width: 50%;'>";
+    echo "<div class='space-y-2' style='width: 50%;'>";
     echo "<h4>Course Name: {$row['course_name']}</h4>";
     echo "<h4>Batch Number: {$row['batch_number']}</h4>";
     echo "<h4>Course End Date: {$row['course_end_date']}</h4>";
@@ -57,7 +57,7 @@ if ($result->num_rows > 0) {
     echo "</div>";
     echo "</div>";
 
-    echo "<h2 style='text-align:center; margin-top:20px;'>Certificate Display:</h2>";
+    echo "<h2 class='text-2xl mt-5 font-bold' style='text-align:center; margin-top:20px;'>Certificate Display:</h2>";
     echo "<div style='position: relative;'>";
     echo "<img style='width: 100%; margin-left: auto; margin-right: auto;' src='https://www.certificate.creativeit.xyz/front/images/certificate/certificate5.jpg'>";
     echo "<div style='position: absolute;top: 45%;left: 20%;transform: translate(-50%, -50%);color: black;'>";
@@ -108,8 +108,39 @@ if ($result->num_rows > 0) {
 
 $stmt->close();
 $conn->close();
-
-include 'footer.php';
-
 ?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.24/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <footer class="footer p-10 bg-slate-500 text-base-content text-white">
+        <aside>
+            <img src="./uploads/abcdef.png" width="80px" alt="">
+            <p class="text-white">Providing reliable tech since 1992</p>
+        </aside>
+        
+        <nav>
+            <header class="text-xl text-white">Company</header>
+            <a href="view_about_us.php" class="link link-hover text-white">About us</a>
+        </nav>
+        <nav>
+            <header class="text-xl text-white">Legal</header>
+            <a class="link link-hover text-white">Terms of use</a>
+            <a class="link link-hover text-white">Privacy policy</a>
+            <a class="link link-hover text-white">Cookie policy</a>
+        </nav>
+    </footer>
+</body>
+
+</html>
 

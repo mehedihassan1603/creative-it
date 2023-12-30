@@ -160,7 +160,7 @@ if (isset($_GET['logout'])) {
         <div class="sidebar bg-gray-900 p-4 h-full md:h-screen w-full md:w-52">
             <div class="sidebar-start">
                 <div class="dropdown">
-                    <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                    <div tabindex="0" role="button" class="bg-gray-400 p-4 rounded-lg hover:border-2 hover:border-white lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -172,7 +172,7 @@ if (isset($_GET['logout'])) {
                         <li
                             class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
                             <a href="index.php" class="menu-item"
-                                style="display: block; width: 100%; height: 100%;">Home</a>
+                                style="display: block; width: 100%; height: 100%;">Front Home</a>
                         </li>
 
                         <li
@@ -215,7 +215,7 @@ if (isset($_GET['logout'])) {
                         <li
                             class="bg-zinc-300 mt-2 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
                             <a href="admin.php?page=users" class="menu-item"
-                                style="display: block; width: 100%; height: 100%;">Users</a>
+                                style="display: block; width: 100%; height: 100%;">Admin's</a>
                         </li>
                         <li <li
                             class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
@@ -235,7 +235,7 @@ if (isset($_GET['logout'])) {
                     <li
                         class="bg-zinc-300 w-full text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
                         <a href="index.php" class="menu-item"
-                            style="display: block; width: 100%; height: 100%;">Home</a>
+                            style="display: block; width: 100%; height: 100%;">Front Home</a>
                     </li>
 
                     <li
@@ -277,7 +277,7 @@ if (isset($_GET['logout'])) {
                     <li
                         class="bg-zinc-300 w-full mt-2 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
                         <a href="admin.php?page=users" class="menu-item"
-                            style="display: block; width: 100%; height: 100%;">Users</a>
+                            style="display: block; width: 100%; height: 100%;">Admin's</a>
                     </li>
                     <li
                         class="bg-zinc-300 w-full text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">

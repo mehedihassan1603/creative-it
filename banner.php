@@ -21,7 +21,7 @@
 
     <div class="carousel w-full">
         <div id="slide1" class="carousel-item relative w-full h-2/4">
-            <img src="./uploads/brown.png" class="w-full h-[500px]" />
+            <img src="./uploads/brown.png" class="w-full h-[300px] md:h-[400px] lg:h-[500px]" />
             <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                 <a href="#slide2" class="btn btn-circle">❮</a>
                 <a href="#slide2" class="btn btn-circle">❯</a>

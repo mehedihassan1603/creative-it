@@ -10,34 +10,50 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-if (isset($_POST['course_submit'])) {
-    $name = $_POST['new_course'];
-    $sqli = "INSERT INTO `courses` (`course_name`) VALUES ('$name')";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['course_submit'])) {
+        $name = $_POST['new_course'];
 
-    if (mysqli_query($conn, $sqli)) {
-        // echo '<div id="success-alert" class="bg-green-200 text-green-800 p-4 rounded mt-4">
-        //     <h1>Data Inserted Successfully!</h1>
-        //     <button class="btn btn-success">Go back to Profile</button>
-        // </div>';
-    } else {
-        echo "Not Insert";
+        $checkQuery = "SELECT * FROM courses WHERE course_name = '$name'";
+        $checkResult = mysqli_query($conn, $checkQuery);
+
+        if (mysqli_num_rows($checkResult) > 0) {
+            echo '<div id="error-alert" class="bg-red-200 text-red-800 p-4 rounded mt-4">
+                <h1>Course Name already exists!</h1>
+            </div>';
+        } else {
+            $sqli = "INSERT INTO `courses` (`course_name`) VALUES ('$name')";
+
+            if (mysqli_query($conn, $sqli)) {
+                echo '<div id="success-alert" class="bg-green-200 text-green-800 p-4 rounded mt-4">
+                    <h1>New Course Inserted Successfully!</h1>
+                </div>';
+                echo '<script>
+                        setTimeout(function(){
+                            window.location.href = "/cit/admin.php?page=add_option";
+                        }, 1000);
+                      </script>';
+                exit();
+            } else {
+                echo "Not Inserted";
+            }
+        }
+    }
+
+    if (isset($_POST['delete_course'])) {
+        $deleteId = $_POST['delete_course'];
+        $deleteQuery = "DELETE FROM `courses` WHERE `id` = $deleteId";
+
+        if (mysqli_query($conn, $deleteQuery)) {
+            echo '<div id="success-alert" class="bg-green-200 text-green-800 p-4 rounded mt-4">
+                <h1>Deleted Successfully!</h1>
+            </div>';
+        } else {
+            echo "Not Delete";
+        }
     }
 }
 
-if (isset($_POST['delete_course'])) {
-    $deleteId = $_POST['delete_course'];
-    $deleteQuery = "DELETE FROM `courses` WHERE `id` = $deleteId";
-
-    if (mysqli_query($conn, $deleteQuery)) {
-        echo '<div id="success-alert" class="bg-green-200 text-green-800 p-4 rounded mt-4">
-            <h1>Deleted Successfully!</h1>
-        </div>';
-    } else {
-        echo "Not Delete";
-    }
-}
-
-// Fetch and display all data in a table
 $result = mysqli_query($conn, "SELECT * FROM courses");
 ?>
 
@@ -98,9 +114,7 @@ $result = mysqli_query($conn, "SELECT * FROM courses");
                 ?>
             </tbody>
         </table>
-
     </div>
-
 
     <script>
         <?php

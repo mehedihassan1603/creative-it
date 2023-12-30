@@ -10,35 +10,53 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-if (isset($_POST['batch_submit'])) {
-    $batchName = $_POST['new_batch'];
-    $sql = "INSERT INTO `batches` (`batch_name`) VALUES ('$batchName')";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['batch_submit'])) {
+        $batchName = $_POST['new_batch'];
 
-    if (mysqli_query($conn, $sql)) {
-        echo '<div id="success-alert" class="bg-green-200 text-green-800 p-4 rounded mt-4">
-            <h1>New Batch Inserted Successfully!</h1>
-        </div>';
-    } else {
-        echo "Not Inserted";
+        $checkQuery = "SELECT * FROM batches WHERE batch_name = '$batchName'";
+        $checkResult = mysqli_query($conn, $checkQuery);
+
+        if (mysqli_num_rows($checkResult) > 0) {
+            echo '<div id="error-alert" class="bg-red-200 text-red-800 p-4 rounded mt-4">
+                <h1>Batch Name already exists!</h1>
+            </div>';
+        } else {
+            $sql = "INSERT INTO `batches` (`batch_name`) VALUES ('$batchName')";
+
+            if (mysqli_query($conn, $sql)) {
+                echo '<div id="success-alert" class="bg-green-200 text-green-800 p-4 rounded mt-4">
+                    <h1>New Batch Inserted Successfully!</h1>
+                </div>';
+                echo '<script>
+                    setTimeout(function(){
+                        window.location.href = "/cit/admin.php?page=add_batch";
+                    }, 1000);
+                  </script>';
+                exit();
+            } else {
+                echo "Not Inserted";
+            }
+        }
+    }
+
+    if (isset($_POST['delete_batch'])) {
+        $deleteId = $_POST['delete_batch'];
+        $deleteQuery = "DELETE FROM `batches` WHERE `id` = $deleteId";
+
+        if (mysqli_query($conn, $deleteQuery)) {
+            echo '<div id="success-alert" class="bg-green-200 text-green-800 p-4 rounded mt-4">
+                <h1>Batch Deleted Successfully!</h1>
+            </div>';
+        } else {
+            echo "Not Deleted";
+        }
     }
 }
-
-if (isset($_POST['delete_batch'])) {
-    $deleteId = $_POST['delete_batch'];
-    $deleteQuery = "DELETE FROM `batches` WHERE `id` = $deleteId";
-
-    if (mysqli_query($conn, $deleteQuery)) {
-        echo '<div id="success-alert" class="bg-green-200 text-green-800 p-4 rounded mt-4">
-            <h1>Batch Deleted Successfully!</h1>
-        </div>';
-    } else {
-        echo "Not Deleted";
-    }
-}
-
-// Fetch and display all data in a table
 $result = mysqli_query($conn, "SELECT * FROM batches");
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">

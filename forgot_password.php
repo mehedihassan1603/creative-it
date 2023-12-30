@@ -52,9 +52,6 @@ if (isset($_POST['forgot_submit'])) {
     }
 }
 ?>
-<!-- ... (rest of the HTML code remains unchanged) -->
-
-<!-- ... (rest of the HTML code remains unchanged) -->
 
 <!DOCTYPE html>
 <html lang="en">

@@ -190,8 +190,6 @@
 
     <div class="content">
         <?php
-        // Your PHP code for retrieving data here...
-
         $totalRecordsQuery = "SELECT COUNT(*) as total_records FROM students";
         $totalRecordsResult = $conn->query($totalRecordsQuery);
         $totalRecords = $totalRecordsResult->fetch_assoc()['total_records'];

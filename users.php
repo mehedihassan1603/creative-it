@@ -11,9 +11,11 @@ if ($conn->connect_error) {
 }
 
 
-$usersQuery = "SELECT id, name, email, password FROM students";
+$usersQuery = "SELECT id, name, email, password FROM users";
 $usersResult = $conn->query($usersQuery);
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,8 +29,13 @@ $usersResult = $conn->query($usersQuery);
 
 <body class="bg-gray-800 text-white">
 
+    <div class="flex justify-center gap-10 mt-10">
+        <a href="/cit/edit_about_us.php" class="bg-teal-500 p-3 rounded-lg hover:bg-teal-600">Edit About Page</a>
+        <a href="/cit/edit_reviews.php" class="bg-teal-500 p-3 rounded-lg hover:bg-teal-600">Edit Reviews</a>
+    </div>
+
     <div class="container mx-auto p-8">
-        <h3 class="text-3xl text-center mt-4">Users Information</h3>
+        <h3 class="text-3xl text-center mt-4">Admin Information</h3>
 
         <table class="mt-4 mx-auto">
             <tr>
@@ -49,8 +56,8 @@ $usersResult = $conn->query($usersQuery);
                 echo "<td class='py-2 px-4'>" . $row['name'] . "</td>";
                 echo "<td class='py-2 px-4'>" . $row['email'] . "</td>";
                 echo "<td class='py-2 px-4'>" . $row['password'] . "</td>";
-                echo "<td class='py-2 px-4'><a class='text-white p-2 rounded-lg hover:bg-slate-700' href='edit.php?id={$row['id']}'>Edit</a></td>";
-                echo "<td class='py-2 px-4'><a class='text-white p-2 rounded-lg hover:bg-slate-700' href='delete.php?id={$row['id']}'>Delete</a></td>"; // Assuming 'id' is the primary key
+                echo "<td class='py-2 px-4'><a class='text-white p-2 rounded-lg hover:bg-slate-700' href='edit_admin.php?id={$row['id']}'>Edit</a></td>";
+                echo "<td class='py-2 px-4'><a class='text-white p-2 rounded-lg hover:bg-slate-700' href='delete_admin.php?id={$row['id']}'>Delete</a></td>"; // Assuming 'id' is the primary key
                 echo "</tr>";
 
                 $serialNumber++;
