@@ -6,16 +6,7 @@ if (!isset($_SESSION['email'])) {
     exit();
 }
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "creativeit";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include 'config.php';
 
 $email = $_SESSION['email'];
 $sql = "SELECT * FROM `students` WHERE `email`='$email'";

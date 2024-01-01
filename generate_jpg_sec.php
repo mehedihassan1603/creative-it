@@ -1,15 +1,6 @@
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "creativeit";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("connection failed" . $conn->connect_error);
-}
+include 'config.php';
 
 $searchId = $_GET['certificate_id'];
 $stmt = $conn->prepare("SELECT * FROM students WHERE certificate_id = ?");

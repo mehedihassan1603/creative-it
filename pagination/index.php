@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect('localhost', 'root', '', 'creativeit');
+include '../config.php'; 
 
 session_start();
 
@@ -167,23 +167,23 @@ if (isset($_GET['logout'])) {
 						class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
 						<li
 							class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-							<a href="index.php" class="menu-item"
+							<a href="/index.php" class="menu-item"
 								style="display: block; width: 100%; height: 100%;">Front Home</a>
 						</li>
 
 						<li
 							class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-							<a href="/cit/admin.php?page=dashboard" class="menu-item"
+							<a href="/admin.php?page=dashboard" class="menu-item"
 								style="display: block; width: 100%; height: 100%;">Profile</a>
 						</li>
 						<li
 							class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-							<a href="/cit/admin.php?page=add_option" class="menu-item"
+							<a href="/admin.php?page=add_option" class="menu-item"
 								style="display: block; width: 100%; height: 100%;">All Courses</a>
 						</li>
 						<li
 							class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-							<a href="/cit/admin.php?page=add_batch" class="menu-item"
+							<a href="/admin.php?page=add_batch" class="menu-item"
 								style="display: block; width: 100%; height: 100%;">All Batches</a>
 						</li>
 
@@ -197,12 +197,12 @@ if (isset($_GET['logout'])) {
 								class="dropdown-content z-[1] menu shadow bg-base-200 p-4 rounded-box w-52">
 								<li
 									class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-									<a href="/cit/admin.php?page=addStudents" class="menu-item"
+									<a href="/admin.php?page=addStudents" class="menu-item"
 										style="display: block; width: 100%; height: 100%;">Add Students</a>
 								</li>
 								<li
 									class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-									<a href="/cit/admin.php?page=pagination" class="menu-item"
+									<a href="/admin.php?page=pagination" class="menu-item"
 										style="display: block; width: 100%; height: 100%;">View Students</a>
 								</li>
 							</ul>
@@ -230,13 +230,13 @@ if (isset($_GET['logout'])) {
 				<ul class="menu menu-horizontal px-1">
 					<li
 						class="bg-zinc-300 w-full text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-						<a href="index.php" class="menu-item" style="display: block; width: 100%; height: 100%;">Front
+						<a href="/index.php" class="menu-item" style="display: block; width: 100%; height: 100%;">Front
 							Home</a>
 					</li>
 
 					<li
 						class="bg-zinc-300 w-full text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-						<a href="/cit/admin.php?page=dashboard" class="menu-item"
+						<a href="/admin.php?page=dashboard" class="menu-item"
 							style="display: block; width: 100%; height: 100%;">Profile</a>
 					</li>
 					<li
@@ -246,7 +246,7 @@ if (isset($_GET['logout'])) {
 					</li>
 					<li
 						class="bg-zinc-300 w-full text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-						<a href="/cit/admin.php?page=add_batch" class="menu-item"
+						<a href="/admin.php?page=add_batch" class="menu-item"
 							style="display: block; width: 100%; height: 100%;">All Batches</a>
 					</li>
 
@@ -259,7 +259,7 @@ if (isset($_GET['logout'])) {
 						<ul tabindex="0" class="dropdown-content z-[1] menu shadow bg-base-200 p-4 rounded-box w-52">
 							<li
 								class="bg-zinc-300 w-full text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-								<a href="/cit/admin.php?page=addStudents" class="menu-item"
+								<a href="/admin.php?page=addStudents" class="menu-item"
 									style="display: block; width: 100%; height: 100%;">Add Students</a>
 							</li>
 							<li
@@ -272,17 +272,17 @@ if (isset($_GET['logout'])) {
 
 					<li
 						class="bg-zinc-300 w-full mt-2 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-						<a href="/cit/admin.php?page=users" class="menu-item"
+						<a href="/admin.php?page=users" class="menu-item"
 							style="display: block; width: 100%; height: 100%;">Admin's</a>
 					</li>
 					<li
 						class="bg-zinc-300 w-full text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-						<a href="/cit/admin.php?page=certificate_list" class="menu-item"
+						<a href="/admin.php?page=certificate_list" class="menu-item"
 							style="display: block; width: 100%; height: 100%;">New Certificate</a>
 					</li>
 					<li
 						class="bg-zinc-300 w-full text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-						<a href="/cit/admin.php?logout=true" class="menu-item"
+						<a href="/admin.php?logout=true" class="menu-item"
 							style="display: block; width: 100%; height: 100%;">Log Out</a>
 					</li>
 				</ul>

@@ -3,7 +3,7 @@ include 'config.php';
 
 $studentId = $_GET['id'];
 
-$deleteStudentQuery = "DELETE FROM users WHERE id = $studentId";
+$deleteStudentQuery = "DELETE FROM reviews WHERE id = $studentId";
 $conn->query($deleteStudentQuery);
 ?>
 
@@ -20,7 +20,7 @@ $conn->query($deleteStudentQuery);
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
 
     <div class="bg-white p-8 rounded shadow-md max-w-md w-full">
-        <h3 class="text-2xl font-bold mb-4">Admin Record Deleted</h3>
+        <h3 class="text-2xl font-bold mb-4">Record Deleted</h3>
         <p class="text-gray-700 mb-4">The student record have been successfully updated.</p>
         <a href="/cit/admin.php" class="text-blue-500 hover:underline">Back to Profile</a>
     </div>

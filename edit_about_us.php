@@ -1,14 +1,5 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "creativeit";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include 'config.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST["name"];
@@ -37,10 +28,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body class="bg-gray-100">
 
-    <div class="container mx-auto p-8">
-        <h2 class="text-3xl font-bold mb-4">About Us (Editable)</h2>
+    <div class="container w-8/12 mx-auto p-8">
+        <h2 class="text-3xl font-bold mb-4 text-center">About Us (Editable)</h2>
 
-        <form method="post" action="">
+        <form class="bg-gray-200" method="post" action="">
             <label for="name" class="block mb-2 font-bold">Name:</label>
             <input type="text" id="name" name="name" required class="w-full px-4 py-2 mb-4 border rounded">
 

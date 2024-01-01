@@ -1,26 +1,37 @@
 <?php
 include 'config.php';
 
-$sql = "SELECT * FROM reviews ORDER BY id DESC";
+$sql = "SELECT * FROM terms ORDER BY id DESC LIMIT 1";
 $result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $name = $row['name'];
+    $name1 = $row['name1'];
+    $name2 = $row['name2'];
+    $name3 = $row['name3'];
+} else {
+    $name = "No data found";
+    $name1 = "";
+    $name2 = "";
+    $name3 = "";
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reviews</title>
+    <title>Terms of Use</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.24/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<body class="font-sans bg-gray-100">
 
-<body class="bg-gray-100">
-
-    <div class="navbar bg-gray-900 p-4 w-full md:w-52">
+<div class="navbar bg-gray-900 p-4 w-full md:w-52">
         <div class="navbar-start">
             <div class="hidden md:block">
                 <img src="uploads/abcdef.png?<?php echo time(); ?>" alt="Logo" width="80px">
@@ -57,59 +68,25 @@ $result = $conn->query($sql);
     </div>
 
     <div class="container mx-auto p-8">
-        <h2 class="text-3xl text-center font-bold mb-4">Reviews</h2>
+        <h1 class="text-3xl font-bold mb-4">Terms of Use</h1>
 
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
-                <?php
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        $name = $row['name'];
-                        $photo = $row['photo'];
-                        $rating = $row['rating'];
-                        $details = $row['details'];
+        <p class="mb-4"><?= $name ?></p>
 
-                        echo '<div class="swiper-slide">';
-                        echo '<div class="mb-8 flex flex-col justify-center items-center">';
-                        echo '<img src="' . $photo . '" alt="User Photo" class="rounded-full h-24 w-24 object-cover mb-2">';
-                        echo '<h3 class="text-xl font-bold mb-2">' . $name . '</h3>';
-                        echo '<div class="rating">';
-                        for ($i = 1; $i <= 5; $i++) {
-                            $checked = $i <= $rating ? 'checked' : '';
-                            echo '<input type="radio" name="rating-' . $name . '" class="mask mask-star-2 bg-green-500" ' . $checked . ' />';
-                        }
-                        echo '</div>';
-                        echo '<p class="text-gray-800">' . $details . '</p>';
-                        echo '</div>';
-                        echo '</div>';
-                    }
-                } else {
-                    echo '<p class="text-center text-gray-600">No reviews available.</p>';
-                }
-                ?>
-            </div>
-            <div class="swiper-pagination"></div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-        </div>
+        <h2 class="text-xl font-bold mb-2">1. Acceptance of Terms</h2>
 
+        <p class="mb-4"><?= $name1 ?></p>
+
+        <h2 class="text-xl font-bold mb-2">2. User Conduct</h2>
+
+        <p class="mb-4"><?= $name2 ?>
+        </p>
+
+        <h2 class="text-xl font-bold mb-2">3. Modifications</h2>
+
+        <p class="mb-4"><?= $name ?></p>
     </div>
 
     <?php include 'footer.php'; ?>
 
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script>
-        var swiper = new Swiper('.swiper-container', {
-            slidesPerView: 3,
-            spaceBetween: 10,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            loop: true,
-        });
-    </script>
-
 </body>
-
 </html>

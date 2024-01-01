@@ -1,14 +1,6 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "creativeit";
+include 'config.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 $sqlLastCertificateId = "SELECT MAX(certificate_id) AS last_certificate_id FROM students";
 $resultLastCertificateId = mysqli_query($conn, $sqlLastCertificateId);
 $rowLastCertificateId = mysqli_fetch_assoc($resultLastCertificateId);

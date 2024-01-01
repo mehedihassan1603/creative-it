@@ -1,14 +1,5 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "creativeit"; 
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include 'config.php';
 
 
 $usersQuery = "SELECT id, name, email, password FROM users";
@@ -29,14 +20,9 @@ $usersResult = $conn->query($usersQuery);
 
 <body class="bg-gray-800 text-white">
 
-    <div class="flex justify-center gap-10 mt-10">
-        <a href="/cit/edit_about_us.php" class="bg-teal-500 p-3 rounded-lg hover:bg-teal-600">Edit About Page</a>
-        <a href="/cit/edit_reviews.php" class="bg-teal-500 p-3 rounded-lg hover:bg-teal-600">Edit Reviews</a>
-    </div>
-
     <div class="container mx-auto p-8">
         <h3 class="text-3xl text-center mt-4">Admin Information</h3>
-
+        <div class="overflow-x-auto">
         <table class="mt-4 mx-auto">
             <tr>
                 <th class="bg-green-500 text-white py-2 px-4">Serial Number</th>
@@ -64,6 +50,8 @@ $usersResult = $conn->query($usersQuery);
             }
             ?>
         </table>
+        </div>
+        
 
     </div>
 </body>

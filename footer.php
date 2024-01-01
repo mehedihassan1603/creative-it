@@ -22,9 +22,8 @@
         </nav>
         <nav>
             <header class="text-xl text-white">Legal</header>
-            <a class="link link-hover text-white">Terms of use</a>
-            <a class="link link-hover text-white">Privacy policy</a>
-            <a class="link link-hover text-white">Cookie policy</a>
+            <a href="view_terms.php" class="link link-hover text-white">Terms of use</a>
+            <a href="view_privacy.php" class="link link-hover text-white">Privacy policy</a>
         </nav>
     </footer>
 </body>

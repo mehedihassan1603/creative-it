@@ -6,16 +6,7 @@ if (!isset($_SESSION['email'])) {
     exit();
 }
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "creativeit";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include 'config.php';
 
 if (isset($_GET['logout'])) {
     session_destroy();
@@ -160,7 +151,8 @@ if (isset($_GET['logout'])) {
         <div class="sidebar bg-gray-900 p-4 h-full md:h-screen w-full md:w-52">
             <div class="sidebar-start">
                 <div class="dropdown">
-                    <div tabindex="0" role="button" class="bg-gray-400 p-4 rounded-lg hover:border-2 hover:border-white lg:hidden">
+                    <div tabindex="0" role="button"
+                        class="bg-gray-400 p-4 rounded-lg hover:border-2 hover:border-white lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -206,7 +198,7 @@ if (isset($_GET['logout'])) {
                                 </li>
                                 <li
                                     class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-                                    <a href="admin.php?page=pagination" class="menu-item"
+                                    <a href="students.php" class="menu-item"
                                         style="display: block; width: 100%; height: 100%;">View Students</a>
                                 </li>
                             </ul>
@@ -217,10 +209,10 @@ if (isset($_GET['logout'])) {
                             <a href="admin.php?page=users" class="menu-item"
                                 style="display: block; width: 100%; height: 100%;">Admin's</a>
                         </li>
-                        <li <li
+                        <li
                             class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-                            <a href="admin.php?page=certificate_list" class="menu-item"
-                                style="display: block; width: 100%; height: 100%;">New Certificate</a>
+                            <a href="admin.php?page=editable" class="menu-item"
+                                style="display: block; width: 100%; height: 100%;">Editable Pages</a>
                         </li>
                         <li
                             class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
@@ -234,8 +226,8 @@ if (isset($_GET['logout'])) {
                 <ul class="menu menu-horizontal px-1">
                     <li
                         class="bg-zinc-300 w-full text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-                        <a href="index.php" class="menu-item"
-                            style="display: block; width: 100%; height: 100%;">Front Home</a>
+                        <a href="index.php" class="menu-item" style="display: block; width: 100%; height: 100%;">Front
+                            Home</a>
                     </li>
 
                     <li
@@ -254,7 +246,7 @@ if (isset($_GET['logout'])) {
                             style="display: block; width: 100%; height: 100%;">All Batches</a>
                     </li>
 
-                    <div class="dropdown dropdown-right">
+                    <div class="dropdown dropdown-right w-full">
                         <li tabindex="0" role=""
                             class="menu-item bg-zinc-300 w-full text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white"
                             style="display: block; width: 100%; height: 100%;">
@@ -268,8 +260,9 @@ if (isset($_GET['logout'])) {
                             </li>
                             <li
                                 class="bg-zinc-300 w-full text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-                                <a href="pagination/index.php" class="menu-item"
-                                    style="display: block; width: 100%; height: 100%;">View Students</a>
+                                <a href="students.php" class="menu-item"
+                                    style="display: block; width: 100%; height: 100%;">View Students
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -281,8 +274,8 @@ if (isset($_GET['logout'])) {
                     </li>
                     <li
                         class="bg-zinc-300 w-full text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-                        <a href="admin.php?page=certificate_list" class="menu-item"
-                            style="display: block; width: 100%; height: 100%;">New Certificate</a>
+                        <a href="admin.php?page=editable" class="menu-item"
+                            style="display: block; width: 100%; height: 100%;">Editable Pages</a>
                     </li>
                     <li
                         class="bg-zinc-300 w-full text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">

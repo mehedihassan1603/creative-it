@@ -1,14 +1,5 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$dbpassword = "";
-$dbname = "creativeit";
-
-$conn = new mysqli($servername, $username, $dbpassword, $dbname);
-
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+include 'config.php';
 
 if (isset($_POST['signup_submit'])) {
     $name = $_POST['name'];

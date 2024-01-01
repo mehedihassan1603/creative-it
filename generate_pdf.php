@@ -59,16 +59,7 @@ function generatePDF($imagePath, $id, $idFont, $idText, $idFontSize, $date, $dat
 
 $certificateId = $_GET['certificate_id'];
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "creativeit";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include 'config.php';
 
 $stmt = $conn->prepare("SELECT * FROM students WHERE certificate_id = ?");
 $stmt->bind_param("s", $certificateId);

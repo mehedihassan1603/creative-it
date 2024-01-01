@@ -1,16 +1,8 @@
 <?php
 session_start();
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "creativeit";
+include 'config.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 if (isset($_POST['login_submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
