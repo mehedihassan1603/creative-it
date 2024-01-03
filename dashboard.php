@@ -1,3 +1,32 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION['email'])) {
+    header("Location: login.php");
+    exit();
+}
+include 'config.php';
+
+$query = "SELECT * FROM information ORDER BY id DESC LIMIT 1";
+$result = mysqli_query($conn, $query);
+
+if ($result) {
+    $row = mysqli_fetch_assoc($result);
+
+    $name = $row['name'];
+} else {
+    echo "Error: " . mysqli_error($conn);
+}
+
+
+if (isset($_GET['logout'])) {
+    session_destroy();
+    header("Location: login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,7 +63,7 @@
             text-align: center;
         }
 
-        .statistics-box {
+        /* .statistics-box {
             background-color: #3498db;
             color: white;
             padding: 20px;
@@ -46,7 +75,7 @@
         .statistics-box p {
             margin: 0;
             font-size: 18px;
-        }
+        } */
 
         h3 {
             margin-top: 20px;
@@ -94,27 +123,27 @@
             display: none;
             position: absolute;
             top: 50%;
-            left: 61%;
+            left: 57%;
             transform: translate(-50%, -50%);
             cursor: pointer;
             color: white;
             background-color: #007bff;
             padding: 8px 12px;
             border-radius: 5px;
-            font-size: 24px;
+            font-size: 18px;
         }
 
         .logo-container:hover .edit-icon {
             display: block;
         }
 
-        nav form {
+        /* .nav_form {
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-        }
+            width: 50%;
+        } */
 
         nav input {
             width: 100%;
@@ -143,50 +172,55 @@
 
 <body class="bg-gray-800 text-white">
 
-    <div class="mt-20">
+    <div class="flex flex-col md:flex-row justify-between items-center bg-amber-600 px-10 rounded-lg">
         <nav class="flex justify-center logo-container relative">
-            <img class="bg-white w-48 rounded-full" src="uploads/abcdef.png?<?php echo time(); ?>" alt="Logo"
-                width="80px">
-            <i class="fa-solid fa-pen-to-square edit-icon hover:cursor-pointer"
-                onclick="my_modal_6.showModal()"></i>
+            <img class="bg-white w-24 rounded-full" src="uploads/abcdef.png?<?php echo time(); ?>" alt="Logo">
+            <i class="fa-solid fa-pen-to-square edit-icon hover:cursor-pointer" onclick="my_modal_6.showModal()"></i>
             <dialog id="my_modal_6" class="modal modal-bottom sm:modal-middle">
-                <form id="uploadForm" enctype="multipart/form-data">
+                <form class="nav_form bg-white w-4/5 md:w-2/5 mx-auto" id="uploadForm" enctype="multipart/form-data">
                     <h2>Upload Logo</h2>
 
                     <label for="logo">Choose a logo:</label>
                     <input class="text-black" type="file" id="logo" name="logo" accept="image/*" required>
 
-                    <input class="text-black" type="button" value="Upload" onclick="uploadLogo()">
+                    <input class="text-black hover:bg-gray-300 hover:cursor-pointer" type="button" value="Upload"
+                        onclick="uploadLogo()">
+                    <div class="text-center"><a href="admin.php?page=dashboard"><i
+                                class="fa-solid text-black p-2 text-2xl fa-xmark hover:text-white hover:bg-red-500 hover:p-2"></i></a>
+                    </div>
                 </form>
-                <form class="bg-red-600 text-center" method="dialog">
-                    <button onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
-                </form>
+
             </dialog>
         </nav>
 
+
+        <h1 class=" text-2xl py-2 px-1">
+            <?php echo "<p>" . $name . "</p>"; ?>
+        </h1>
+
         <div>
-            <h1
-                class="text-3xl text-center text-red relative hover:cursor-pointer hover:text-white">
-                <?php echo isset($_POST['newTitle']) ? htmlspecialchars($_POST['newTitle']) : 'Creative IT'; ?>
-                <i class="fa-solid fa-pen-to-square hover:cursor-pointer" onclick="my_modal_5.showModal()"></i>
-                <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
-                    <form class="bg-blue-500 flex flex-col" method="post" action="">
-                        <label for="newTitle">Enter new website title:</label>
-                        <input class="text-black" type="text" id="newTitle" name="newTitle" required>
-                        <button
-                            class="mt-4 text-lg w-32 mx-auto bg-red-600 hover:bg-green-600" type="submit">Click
-                            here</button>
-                    </form>
-                    <form class="bg-red-600" method="dialog">
-                        <button><i class="fa-solid fa-xmark"></i></button>
-                    </form>
-                </dialog>
-
-            </h1>
-
+            <a  class="bg-lime-700 text-2xl py-2 px-1 rounded-md hover:bg-green-600" href="admin.php?page=information">Edit Information</a>
         </div>
+
+        <!-- <div class="text-2xl text-center text-red relative hover:cursor-pointer hover:text-white">
+            <?php echo isset($_POST['newTitle']) ? htmlspecialchars($_POST['newTitle']) : 'Creative IT'; ?>
+            <i class="fa-solid fa-pen-to-square hover:cursor-pointer" onclick="my_modal_5.showModal()"></i>
+            <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+                <form class="bg-blue-500 flex flex-col" method="post" action="">
+                    <label for="newTitle">Enter new website title:</label>
+                    <input class="text-black" type="text" id="newTitle" name="newTitle" required>
+                    <button class="mt-4 text-lg w-32 mx-auto bg-red-600 hover:bg-green-600" type="submit">Click
+                        here</button>
+                </form>
+                <form class="bg-red-600" method="dialog">
+                    <button><i class="fa-solid fa-xmark"></i></button>
+                </form>
+            </dialog>
+        </div> -->
+
+
     </div>
-    
+
 
     <div class="content">
         <?php
@@ -197,26 +231,52 @@
         $totalCertificatesQuery = "SELECT COUNT(DISTINCT certificate_id) as total_certificates FROM students";
         $totalCertificatesResult = $conn->query($totalCertificatesQuery);
         $totalCertificates = $totalCertificatesResult->fetch_assoc()['total_certificates'];
+
+        $totalCoursesQuery = "SELECT COUNT(*) as total_course FROM courses";
+        $totalCoursesResult = $conn->query($totalCoursesQuery);
+        $totalCourses = $totalCoursesResult->fetch_assoc()['total_course'];
+
+        $totalBatchesQuery = "SELECT COUNT(*) as total_batch FROM batches";
+        $totalBatchesResult = $conn->query($totalBatchesQuery);
+        $totalBatches = $totalBatchesResult->fetch_assoc()['total_batch'];
         ?>
 
-        <div class="state-container flex flex-col md:flex-row gap-20 my-10">
-            <div class="statistics-box">
+        <div class="md:w-4/5 mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 my-10">
+            <div class="bg-blue-600 text-center font-bold text-2xl rounded-lg flex flex-col justify-center py-4">
                 <p>Total Number of Records</p>
-                <h3><?php echo $totalRecords; ?></h3>
+                <h3>
+                    <?php echo $totalRecords; ?>
+                </h3>
             </div>
 
-            <div class="statistics-box">
+            <div class="bg-rose-600 text-center font-bold text-2xl rounded-lg flex flex-col justify-center py-4">
                 <p>Total Number of Certificates</p>
-                <h3><?php echo $totalCertificates; ?></h3>
+                <h3>
+                    <?php echo $totalCertificates; ?>
+                </h3>
+            </div>
+
+            <div class="bg-indigo-600 text-center font-bold text-2xl rounded-lg flex flex-col justify-center py-4">
+                <p>Total Number of Courses</p>
+                <h3>
+                    <?php echo $totalCourses; ?>
+                </h3>
+            </div>
+
+            <div class="bg-violet-600 text-center font-bold text-2xl rounded-lg flex flex-col justify-center py-4">
+                <p>Total Number of Batches</p>
+                <h3>
+                    <?php echo $totalBatches; ?>
+                </h3>
             </div>
         </div>
 
         <div class="bg-white">
             <h1 class="text-white py-2 bg-violet-600 text-3xl text-center">Statistics Bar:</h1>
-            <canvas id="statisticsChart" width="100" height="50"></canvas>
+            <canvas id="statisticsChart" width="100" height="30"></canvas>
         </div>
     </div>
-    
+
 
     <!-- <form class="text-black" id="searchForm" method="post" action="index.php">
         <label for="searchType">Select Search Type:</label>
@@ -242,7 +302,7 @@
                 .then(data => {
                     if (data.success) {
                         alert('Logo uploaded successfully!');
-                        location.reload(); 
+                        location.reload();
                     } else {
                         alert('Error uploading logo. Please try again.');
                     }
@@ -268,18 +328,26 @@
             }
         }
 
-       
+
         var ctx = document.getElementById('statisticsChart').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Total Records', 'Total Certificates'],
+                labels: ['Total Records', 'Total Certificates', 'Total Course', 'Total Batch'],
                 datasets: [{
                     label: 'Statistics',
-                    data: [<?php echo $totalRecords; ?>, <?php echo $totalCertificates; ?>],
+                    data: [<?php echo $totalRecords; ?>, <?php echo $totalCertificates; ?>, <?php echo $totalCourses; ?>, <?php echo $totalBatches; ?>],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.2)',
                         'rgba(255, 99, 132, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 99, 132, 1)'
+                    ],
+                    borderColor: [
+                        'rgba(240, 128, 128)',
+                        'rgba(240, 128, 128)'
                     ],
                     borderColor: [
                         'rgba(75, 192, 192, 1)',
@@ -296,7 +364,7 @@
                 }
             }
         });
-    
+
 
     </script>
 </body>

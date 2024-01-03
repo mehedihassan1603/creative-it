@@ -1,5 +1,11 @@
 <?php
 include 'config.php';
+session_start();
+
+if (!isset($_SESSION['email'])) {
+	header("Location: login.php");
+	exit();
+}
 
 if (isset($_POST['signup_submit'])) {
     $name = $_POST['name'];
@@ -39,6 +45,12 @@ $sql = "SELECT * FROM courses";
 $query = mysqli_query($conn, $sql);
 $sqlb = "SELECT * FROM batches";
 $queryb = mysqli_query($conn, $sqlb);
+
+if (isset($_GET['logout'])) {
+	session_destroy();
+	header("Location: login.php");
+	exit();
+}
 ?>
 
 

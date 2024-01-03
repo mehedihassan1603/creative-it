@@ -58,10 +58,6 @@ if (isset($_POST['login_submit'])) {
                 Login
             </button>
         </form>
-        <div class="mt-4 text-center">
-            <p>Don't have an account? <a href="signup.php" class="text-blue-500">Sign Up</a></p>
-        </div>
-
         <div class="flex justify-center">
             <button
                 class="bg-green-500 text-white px-4 py-2 rounded mt-4 hover:bg-red-600 focus:outline-none focus:shadow-outline-blue">

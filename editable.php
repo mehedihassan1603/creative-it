@@ -1,3 +1,20 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION['email'])) {
+    header("Location: login.php");
+    exit();
+}
+
+if (isset($_GET['logout'])) {
+	session_destroy();
+	header("Location: login.php");
+	exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +29,7 @@
 
     <div class="grid grid-cols-2 justify-center w-10/12 mx-auto text-center text-lg gap-10 mt-10">
         <a href="admin.php?page=edit_about_us" class="bg-teal-500 p-3 px-10 py-12 rounded-lg hover:bg-teal-600">Edit About Page</a>
-        <a href="edit_reviews.php" class="bg-teal-500 p-3 px-10 py-12 rounded-lg hover:bg-teal-600">Edit Reviews</a>
+        <a href="admin.php?page=edit_about_us" class="bg-teal-500 p-3 px-10 py-12 rounded-lg hover:bg-teal-600">Edit Reviews</a>
         <a href="admin.php?page=edit_contact" class="bg-teal-500 p-3 px-10 py-12 rounded-lg hover:bg-teal-600">Edit contact</a>
         <a href="admin.php?page=edit_privacy" class="bg-teal-500 p-3 px-10 py-12 rounded-lg hover:bg-teal-600">Edit privacy</a>
         <a href="admin.php?page=edit_terms" class="bg-teal-500 p-3 px-10 py-12 rounded-lg hover:bg-teal-600">Edit terms</a>

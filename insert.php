@@ -12,6 +12,8 @@ $courseEndDate = $_POST['course_end_date'];
 $certificateDate = $_POST['certificate_date'];
 $email = $_POST['email'];
 $userPassword = $_POST['password'];
+$address = $_POST['address'];
+$phone = $_POST['phone'];
 
 $checkCertificateIdSql = "SELECT * FROM students WHERE certificate_id = '$certificateId'";
 $checkCertificateIdResult = $conn->query($checkCertificateIdSql);
@@ -28,8 +30,8 @@ if ($checkCertificateIdResult->num_rows > 0) {
             <h1>Email already exists. Please use a different one.</h1>
         </div>';
 } else {
-    $insertSql = "INSERT INTO students (certificate_id, name, father_name, mother_name, course_name, batch_number, course_end_date, certificate_date, email, `password`)
-        VALUES ('$certificateId', '$name', '$fatherName', '$motherName', '$courseName', '$batchNumber', '$courseEndDate', '$certificateDate', '$email', '$userPassword')";
+    $insertSql = "INSERT INTO students (certificate_id, name, father_name, mother_name, course_name, batch_number, course_end_date, certificate_date, email, `password`, `address`, `phone`)
+        VALUES ('$certificateId', '$name', '$fatherName', '$motherName', '$courseName', '$batchNumber', '$courseEndDate', '$certificateDate', '$email', '$userPassword', '$address', '$phone')";
 
     if ($conn->query($insertSql) === TRUE) {
         header("refresh:2;url=/cit/admin.php");

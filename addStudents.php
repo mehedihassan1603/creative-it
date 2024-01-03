@@ -26,9 +26,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $certificate_date = $_POST['certificate_date'];
     $email = $_POST['email']; 
     $user_password = $_POST['password'];
+    $address = $_POST['address'];
+    $phone = $_POST['phone'];
 
-    $sql_insert = "INSERT INTO students (certificate_id, name, father_name, mother_name, course_name, batch_number, course_end_date, certificate_date, `email`, `password`)
-        VALUES ('$newCertificateId', '$name', '$father_name', '$mother_name', '$course_name', '$batch_number', '$course_end_date', '$certificate_date', '$email', '$user_password')";
+    $sql_insert = "INSERT INTO students (certificate_id, name, father_name, mother_name, course_name, batch_number, course_end_date, certificate_date, `email`, `password`, `address`, `phone`)
+        VALUES ('$newCertificateId', '$name', '$father_name', '$mother_name', '$course_name', '$batch_number', '$course_end_date', '$certificate_date', '$email', '$user_password', '$address', '$phone',)";
 
     if ($conn->query($sql_insert) === TRUE) {
         echo '<div id="success-alert" style="background-color: green; color: white; margin-top:30px; padding:20px;" class="bg-green-500 text-white text-xl mt-10 p-4 rounded mt-4">
@@ -82,6 +84,14 @@ $queryb = mysqli_query($conn, $sqlb);
         </div>
 
         <div class="col-span-2 md:col-span-1">
+            <label for="address">Address:</label>
+            <input type="address" id="address" name="address" required class="w-full px-4 py-2 mb-4 border rounded">
+        </div>
+        <div class="col-span-2 md:col-span-1">
+            <label for="phone">Phone:</label>
+            <input type="number" id="phone" name="phone" required class="w-full px-4 py-2 mb-4 border rounded">
+        </div>
+        <div class="col-span-2 md:col-span-1">
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required class="w-full px-4 py-2 mb-4 border rounded">
         </div>
@@ -129,7 +139,7 @@ $queryb = mysqli_query($conn, $sqlb);
         </div>
 
         <div class="col-span-2 text-center">
-            <input type="submit" value="Add to Database" class="bg-green-500 text-white px-6 py-2 rounded cursor-pointer hover:bg-green-700">
+            <input type="submit" value="Submit Information" class="bg-green-500 text-white px-6 py-2 rounded cursor-pointer hover:bg-green-700">
         </div>
     </form>
 </body>

@@ -1,5 +1,11 @@
 <?php
 include 'config.php';
+session_start();
+
+if (!isset($_SESSION['email'])) {
+	header("Location: login.php");
+	exit();
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['course_submit'])) {
@@ -46,6 +52,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 $result = mysqli_query($conn, "SELECT * FROM courses");
+
+if (isset($_GET['logout'])) {
+	session_destroy();
+	header("Location: login.php");
+	exit();
+}
 ?>
 
 <!DOCTYPE html>

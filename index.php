@@ -19,6 +19,17 @@ if ($resulta->num_rows > 0) {
     $details = "";
 }
 
+$query = "SELECT * FROM information ORDER BY id DESC LIMIT 1";
+$resultb = mysqli_query($conn, $query);
+
+if ($resultb) {
+    $row = mysqli_fetch_assoc($resultb);
+    $name = $row['name'];
+    $phone = $row['phone'];
+} else {
+    echo "Error: " . mysqli_error($conn);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -59,6 +70,7 @@ if ($resulta->num_rows > 0) {
                     <li class="mr-4"><a href="result.php" class="text-white">Find Result</a></li>
                 </ul>
             </div>
+            <div class="text-center text-white font-bold ml-4  md:hidden"><?php echo "<span class='font-semibold'>" . $name . "</span>"; ?></div>
         </div>
         <div class="navbar-center hidden md:flex">
             <ul class="menu menu-horizontal px-1">
@@ -70,6 +82,9 @@ if ($resulta->num_rows > 0) {
             </ul>
         </div>
         <div class="navbar-end">
+            <a href="<?php echo htmlspecialchars($phone); ?>" class="bg-white rounded-lg py-2 px-4 mr-6 hover:cursor-pointer  hover:bg-red-500">
+            <i class="fa-solid fa-phone text-lg "></i>
+            </a>
             <div tabindex="0" role="button" class="bg-orange-600 px-4 py-2 rounded-lg m-1 hover:bg-orange-700"><a
                     href="studentLogin.php">Login</a></div>
         </div>
@@ -97,12 +112,17 @@ if ($resulta->num_rows > 0) {
     include 'banner.php';
     ?>
 
+    <?php
+    include 'services.php';
+    ?>
+
+
     <div class="container mx-auto p-8">
         <h2 class="text-3xl font-bold mb-4 text-center">About Us</h2>
 
         <div class="flex flex-col md:flex-row">
             <div class="w-full md:w-2/4">
-                <img src="https://static.vecteezy.com/system/resources/previews/021/389/011/original/about-us-button-web-template-speech-bubble-banner-label-about-us-sign-icon-illustration-vector.jpg"
+                <img class="w-3/4 mx-auto" src="uploads/aboutus.jpg"
                     alt="">
             </div>
             <div class="bg-gray-100 p-6 text-center w-full md:w-2/4 rounded-md shadow-md">

@@ -68,7 +68,7 @@ if (isset($_GET['logout'])) {
 <html lang="en">
 
 <head>
-	<title>Pagination Example</title>
+	<title>Students</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -152,7 +152,7 @@ if (isset($_GET['logout'])) {
 
 <body class="bg-gray-800 text-white">
 	<div class="dashboard-container flex flex-col md:flex-row">
-		<div class="sidebar bg-gray-900 p-4 h-full md:h-screen w-full md:w-52">
+		<div class="sidebar bg-gray-900 p-4 h-full md:h-screen w-full md:w-60">
 			<div class="sidebar-start">
 				<div class="dropdown">
 					<div tabindex="0" role="button"
@@ -276,7 +276,7 @@ if (isset($_GET['logout'])) {
 							style="display: block; width: 100%; height: 100%;">Admin's</a>
 					</li>
 					<li
-                            class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
+                            class="bg-zinc-300 w-full text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
                             <a href="admin.php?page=editable" class="menu-item"
                                 style="display: block; width: 100%; height: 100%;">Editable Pages</a>
                         </li>
@@ -303,7 +303,7 @@ if (isset($_GET['logout'])) {
 				<h3 class="text-3xl text-center mt-4">Students Information</h3>
 
 				<!-- Filter Form -->
-				<form method="post" class="mt-8 mb-4 bg-gray-500 text-center">
+				<form method="post" class="mt-8 mb-4 bg-gray-500 text-center w-11/12 mx-auto">
 					<h1 class="text-2xl mb-4">Filter students:</h1>
 					<div class="flex flex-col md:flex-row justify-center space-x-4">
 						<div>
@@ -368,20 +368,24 @@ if (isset($_GET['logout'])) {
 
 
 				<!-- Display Filtered Students -->
-				<div class="overflow-x-auto">
+				<div class="overflow-x-auto w-11/12 mx-auto">
 					<table class="mt-4 w-full border border-green-500">
 						<thead>
 							<tr class="bg-green-500 text-white">
-								<th class="py-2 px-1">Certificate ID</th>
-								<th class="py-2 px-1">Name</th>
-								<th class="py-2 px-1">Father's Name</th>
-								<th class="py-2 px-1">Mother's Name</th>
-								<th class="py-2 px-1">Course Name</th>
-								<th class="py-2 px-1">Batch Number</th>
-								<th class="py-2 px-1">Course End Date</th>
-								<th class="py-2 px-1">Certificate Date</th>
-								<th class="py-2 px-1">Edit</th>
-								<th class="py-2 px-1">Delete</th>
+								<th class="py-2 px-3 text-sm">Certificate ID</th>
+								<th class="py-2 px-3 text-sm">Name</th>
+								<th class="py-2 px-3 text-sm">Father's Name</th>
+								<th class="py-2 px-3 text-sm">Mother's Name</th>
+								<th class="py-2 px-3 text-sm">Address</th>
+								<th class="py-2 px-3 text-sm">Phone</th>
+								<th class="py-2 px-3 text-sm">Email</th>
+								<th class="py-2 px-3 text-sm">Password</th>
+								<th class="py-2 px-3 text-sm">Course Name</th>
+								<th class="py-2 px-3 text-sm">Batch Number</th>
+								<th class="py-2 px-3 text-sm">Course End Date</th>
+								<th class="py-2 px-3 text-sm">Certificate Date</th>
+								<th class="py-2 px-3 text-sm">Edit</th>
+								<th class="py-2 px-3 text-sm">Delete</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -390,16 +394,20 @@ if (isset($_GET['logout'])) {
 							while ($row = $res->fetch_assoc()) {
 								$rowColorClass = ($rowColor++ % 2 == 0) ? 'bg-cyan-700' : 'bg-slate-600';
 								echo "<tr class='text-white $rowColorClass'>";
-								echo "<td class='py-2 px-1' style='width: 10%'>" . $row['certificate_id'] . "</td>";
-								echo "<td class='py-2 px-1' style='width: 15%'>" . $row['name'] . "</td>";
-								echo "<td class='py-2 px-1' style='width: 15%'>" . $row['father_name'] . "</td>";
-								echo "<td class='py-2 px-1' style='width: 15%'>" . $row['mother_name'] . "</td>";
-								echo "<td class='py-2 px-1' style='width: 10%'>" . $row['course_name'] . "</td>";
-								echo "<td class='py-2 px-1' style='width: 10%'>" . $row['batch_number'] . "</td>";
-								echo "<td class='py-2 px-1' style='width: 10%'>" . $row['course_end_date'] . "</td>";
-								echo "<td class='py-2 px-1' style='width: 10%'>" . $row['certificate_date'] . "</td>";
-								echo "<td class='py-2 px-1' style='width: 5%'><a href='/cit/edit.php?id={$row['id']}' class='text-white p-4 rounded-lg hover:bg-slate-700'>Edit</a></td>";
-								echo "<td class='py-2 px-1' style='width: 5%'><a href='/cit/delete.php?id={$row['id']}' class='text-white p-4 rounded-lg hover:bg-slate-700'>Delete</a></td>";
+								echo "<td class='py-2 px-1 text-sm' style='width: 10%'>" . $row['certificate_id'] . "</td>";
+								echo "<td class='py-2 px-1 text-sm' style='width: 15%'>" . $row['name'] . "</td>";
+								echo "<td class='py-2 px-1 text-sm' style='width: 15%'>" . $row['father_name'] . "</td>";
+								echo "<td class='py-2 px-1 text-sm' style='width: 15%'>" . $row['mother_name'] . "</td>";
+								echo "<td class='py-2 px-1 text-sm' style='width: 15%'>" . $row['address'] . "</td>";
+								echo "<td class='py-2 px-1 text-sm' style='width: 15%'>" . $row['phone'] . "</td>";
+								echo "<td class='py-2 px-1 text-sm' style='width: 15%'>" . $row['email'] . "</td>";
+								echo "<td class='py-2 px-1 text-sm' style='width: 15%'>" . $row['password'] . "</td>";
+								echo "<td class='py-2 px-1 text-sm' style='width: 10%'>" . $row['course_name'] . "</td>";
+								echo "<td class='py-2 px-1 text-sm' style='width: 10%'>" . $row['batch_number'] . "</td>";
+								echo "<td class='py-2 px-1 text-sm' style='width: 10%'>" . $row['course_end_date'] . "</td>";
+								echo "<td class='py-2 px-1 text-sm' style='width: 10%'>" . $row['certificate_date'] . "</td>";
+								echo "<td class='py-2 px-1 text-sm' style='width: 5%'><a href='/cit/edit.php?id={$row['id']}' class='text-white p-4 rounded-lg hover:bg-slate-700'>Edit</a></td>";
+								echo "<td class='py-2 px-1 text-sm' style='width: 5%'><a href='/cit/delete.php?id={$row['id']}' class='text-white p-4 rounded-lg hover:bg-slate-700'>Delete</a></td>";
 								echo "</tr>";
 							}
 							?>
