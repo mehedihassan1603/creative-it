@@ -15,9 +15,7 @@ if ($result) {
 } else {
     echo "Error: " . mysqli_error($conn);
 }
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,45 +29,49 @@ if ($result) {
 </head>
 
 <body>
-    <footer class="footer p-10 bg-slate-500 text-base-content text-white">
-        <aside class="flex flex-col justify-center items-center">
-            <img class="bg-white w-16 ml-4 rounded-full" src="uploads/abcdef.png?<?php echo time(); ?>" alt="Logo">
-            <?php echo "<span class='font-semibold text-white'>" . $name . "</span>"; ?>
-            <div class="flex gap-4">
-                <a href="<?php echo htmlspecialchars($facebook); ?>" target="_blank"><i
-                        class="fab fa-facebook text-white text-xl"></i></a>
-                <a href="<?php echo htmlspecialchars($youtube); ?>" target="_blank"><i
-                        class="fab fa-youtube text-white text-xl"></i></a>
-                <a href="<?php echo htmlspecialchars($linkdin); ?>" target="_blank"><i
-                        class="fab fa-linkedin text-white text-xl"></i></a>
+    <footer class=" flex-flex-col pt-10 bg-slate-500 text-base-content text-white mt-auto">
+        <div class="flex justify-around">
+            <div class="flex flex-col justify-center items-center">
+                <img class="bg-white w-16 rounded-full" src="uploads/abcdef.png?<?php echo time(); ?>" alt="Logo">
+                <a href="index.php"><?php echo "<span class='font-semibold text-white'>" . $name . "</span>"; ?></a>
+                <div class="flex gap-4">
+                    <a href="<?php echo htmlspecialchars($facebook); ?>" target="_blank"><i
+                            class="fab fa-facebook text-white text-xl"></i></a>
+                    <a href="<?php echo htmlspecialchars($youtube); ?>" target="_blank"><i
+                            class="fab fa-youtube text-white text-xl"></i></a>
+                    <a href="<?php echo htmlspecialchars($linkdin); ?>" target="_blank"><i
+                            class="fab fa-linkedin text-white text-xl"></i></a>
+                </div>
+
             </div>
 
-        </aside>
+            <nav>
+                <header class="text-xl text-white">Company</header>
+                <a href="view_about_us.php" class="link link-hover text-white">About us</a>
+            </nav>
+            <nav class="flex flex-col">
+                <header class="text-xl text-white">Legal</header>
+                <a href="view_terms.php" class="link link-hover text-white">Terms of use</a>
+                <a href="view_privacy.php" class="link link-hover text-white">Privacy policy</a>
+            </nav>
+        </div>
 
-        <nav>
-            <header class="text-xl text-white">Company</header>
-            <a href="view_about_us.php" class="link link-hover text-white">About us</a>
-        </nav>
-        <nav>
-            <header class="text-xl text-white">Legal</header>
-            <a href="view_terms.php" class="link link-hover text-white">Terms of use</a>
-            <a href="view_privacy.php" class="link link-hover text-white">Privacy policy</a>
-        </nav>
+        <div class="text-white flex justify-between bg-gray-600 mt-10 px-6">
+            <div>&copy; Copyright
+                <?php echo date("Y "); ?> By
+                <?php echo "<span class='font-semibold'>" . $name . "</span>"; ?>
+                . All rights reserved.
+            </div>
+
+            <div class="text-sm">
+                Design & Develop by
+                <?php echo "<span class='font-semibold'>" . $develop . "</span>"; ?>
+            </div>
+
+        </div>
 
     </footer>
-    <div class="px-10 text-white flex justify-between bg-slate-500">
-        <div>&copy;
-            <?php echo date("Y "); ?> By
-            <?php echo "<span class='font-semibold'>" . $name . "</span>"; ?>
-            . All rights reserved.
-        </div>
 
-        <div class="text-sm">
-            Design & Develop by
-            <?php echo "<span class='font-semibold'>" . $develop . "</span>"; ?>
-        </div>
-
-    </div>
 </body>
 
 </html>

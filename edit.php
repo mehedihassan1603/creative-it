@@ -1,5 +1,12 @@
 <?php
 include 'config.php';
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+if (!isset($_SESSION['email'])) {
+    header("Location: login.php");
+    exit();
+}
 
 $sqlLastCertificateId = "SELECT MAX(certificate_id) AS last_certificate_id FROM students";
 $resultLastCertificateId = mysqli_query($conn, $sqlLastCertificateId);
@@ -16,6 +23,12 @@ $studentId = $_GET['id'];
 $fetchStudentQuery = "SELECT * FROM students WHERE id = $studentId";
 $fetchStudentResult = $conn->query($fetchStudentQuery);
 $studentDetails = $fetchStudentResult->fetch_assoc();
+
+if (isset($_GET['logout'])) {
+	session_destroy();
+	header("Location: login.php");
+	exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -34,8 +47,10 @@ $studentDetails = $fetchStudentResult->fetch_assoc();
     <form action="update.php" method="post" class="w-1/2 mx-auto mt-8 bg-white p-8 rounded shadow-lg">
         <input type="hidden" name="id" value="<?php echo $studentDetails['id']; ?>">
 
-        <h2 class="text-2xl font-bold mb-4 text-center">Edit Student</h2>
-
+        <div class="container flex justify-center items-center">
+        <h2 class="text-2xl md:text-3xl font-bold mb-4">Edit Student</h2>
+        <a class="p-3 bg-blue-500 rounded-md text-white font-bold text-lg ml-auto hover:bg-blue-600" href="admin.php?page=students">Back</a>
+        </div>
         <label for="certificate_id" class="block mb-2 font-bold">Certificate ID:</label>
         <input type="text" id="certificate_id" name="certificate_id"
             value="<?php echo is_null($studentDetails['certificate_id']) ? $newCertificateId : $studentDetails['certificate_id']; ?>"
@@ -51,6 +66,12 @@ $studentDetails = $fetchStudentResult->fetch_assoc();
 
         <label for="mother_name" class="block mb-2 font-bold">Mother's Name:</label>
         <input type="text" id="mother_name" name="mother_name" value="<?php echo $studentDetails['mother_name']; ?>"
+            required class="w-full px-4 py-2 mb-4 border rounded">
+        <label for="address" class="block mb-2 font-bold">Address:</label>
+        <input type="text" id="address" name="address" value="<?php echo $studentDetails['address']; ?>"
+            required class="w-full px-4 py-2 mb-4 border rounded">
+        <label for="phone" class="block mb-2 font-bold">Phone Number:</label>
+        <input type="text" id="phone" name="phone" value="<?php echo $studentDetails['phone']; ?>"
             required class="w-full px-4 py-2 mb-4 border rounded">
 
         <label for="course_name" class="block mb-2 font-bold">Course Name:</label>

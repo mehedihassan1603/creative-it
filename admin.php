@@ -160,62 +160,62 @@ if (isset($_GET['logout'])) {
                         </svg>
                     </div>
                     <ul tabindex="0"
-                        class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                        class="menu menu-sm space-y-2 dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                         <li
-                            class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
+                            class="bg-zinc-300 text-black px-2 py-0 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
                             <a href="index.php" class="menu-item"
                                 style="display: block; width: 100%; height: 100%;">Front Home</a>
                         </li>
 
                         <li
-                            class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
+                            class="bg-zinc-300 text-black px-2 py-0 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
                             <a href="admin.php?page=dashboard" class="menu-item"
-                                style="display: block; width: 100%; height: 100%;">Profile</a>
+                                style="display: block; width: 100%; height: 100%;">Dashboard</a>
                         </li>
                         <li
-                            class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
+                            class="bg-zinc-300 text-black px-2 py-0 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
                             <a href="admin.php?page=add_option" class="menu-item"
                                 style="display: block; width: 100%; height: 100%;">All Courses</a>
                         </li>
                         <li
-                            class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
+                            class="bg-zinc-300 text-black px-2 py-0 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
                             <a href="admin.php?page=add_batch" class="menu-item"
                                 style="display: block; width: 100%; height: 100%;">All Batches</a>
                         </li>
 
                         <div class="dropdown dropdown-right">
                             <li tabindex="0" role=""
-                                class="menu-item mb-2 bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white"
+                                class="menu-item mb-2 bg-zinc-300 text-black pl-5 py-0 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white"
                                 style="display: block; width: 100%; height: 100%;">
-                                Manage Students
+                                Manage
                             </li>
                             <ul tabindex="0"
-                                class="dropdown-content z-[1] menu shadow bg-base-200 p-4 rounded-box w-52">
+                                class="dropdown-content z-[1] menu shadow bg-base-200 p-2 rounded-box w-52">
                                 <li
-                                    class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
+                                    class="bg-zinc-300 text-black px-2 py-0 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
                                     <a href="admin.php?page=addStudents" class="menu-item"
                                         style="display: block; width: 100%; height: 100%;">Add Students</a>
                                 </li>
                                 <li
-                                    class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-                                    <a href="students.php" class="menu-item"
+                                    class="bg-zinc-300 text-black px-2 py-0 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
+                                    <a href="admin.php?page=students" class="menu-item"
                                         style="display: block; width: 100%; height: 100%;">View Students</a>
                                 </li>
                             </ul>
                         </div>
 
                         <li
-                            class="bg-zinc-300 mt-2 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
+                            class="bg-zinc-300 mt-2 text-black px-2 py-0 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
                             <a href="admin.php?page=users" class="menu-item"
                                 style="display: block; width: 100%; height: 100%;">Admin's</a>
                         </li>
                         <li
-                            class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
+                            class="bg-zinc-300 text-black px-2 py-0 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
                             <a href="admin.php?page=editable" class="menu-item"
-                                style="display: block; width: 100%; height: 100%;">Editable Pages</a>
+                                style="display: block; width: 100%; height: 100%;">Pages</a>
                         </li>
                         <li
-                            class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
+                            class="bg-zinc-300 text-black px-2 py-0 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
                             <a href="admin.php?logout=true" class="menu-item"
                                 style="display: block; width: 100%; height: 100%;">Log Out</a>
                         </li>
@@ -233,7 +233,7 @@ if (isset($_GET['logout'])) {
                     <li
                         class="bg-zinc-300 w-full text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
                         <a href="admin.php?page=dashboard" class="menu-item"
-                            style="display: block; width: 100%; height: 100%;">Profile</a>
+                            style="display: block; width: 100%; height: 100%;">Dashboard</a>
                     </li>
                     <li
                         class="bg-zinc-300 w-full text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
@@ -248,9 +248,9 @@ if (isset($_GET['logout'])) {
 
                     <div class="dropdown dropdown-right w-full">
                         <li tabindex="0" role=""
-                            class="menu-item bg-zinc-300 w-full text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white"
+                            class="menu-item bg-zinc-300 w-full text-black pl-8 pt-2 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white"
                             style="display: block; width: 100%; height: 100%;">
-                            Manage Students
+                            Manage
                         </li>
                         <ul tabindex="0" class="dropdown-content z-[1] menu shadow bg-base-200 p-4 rounded-box w-52">
                             <li
@@ -260,7 +260,7 @@ if (isset($_GET['logout'])) {
                             </li>
                             <li
                                 class="bg-zinc-300 w-full text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-                                <a href="students.php" class="menu-item"
+                                <a href="admin.php?page=students" class="menu-item"
                                     style="display: block; width: 100%; height: 100%;">View Students
                                 </a>
                             </li>
@@ -275,7 +275,7 @@ if (isset($_GET['logout'])) {
                     <li
                         class="bg-zinc-300 w-full text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
                         <a href="admin.php?page=editable" class="menu-item"
-                            style="display: block; width: 100%; height: 100%;">Editable Pages</a>
+                            style="display: block; width: 100%; height: 100%;">Pages</a>
                     </li>
                     <li
                         class="bg-zinc-300 w-full text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">

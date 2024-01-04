@@ -10,9 +10,9 @@ $resulta = $conn->query($sqla);
 
 if ($resulta->num_rows > 0) {
     $row = $resulta->fetch_assoc();
-    $name = $row['name'];
-    $designation = $row['designation'];
-    $details = $row['details'];
+    $namea = $row['name'];
+    $designationa = $row['designation'];
+    $detailsa = $row['details'];
 } else {
     $name = "No data found";
     $designation = "";
@@ -70,7 +70,9 @@ if ($resultb) {
                     <li class="mr-4"><a href="result.php" class="text-white">Find Result</a></li>
                 </ul>
             </div>
-            <div class="text-center text-white font-bold ml-4  md:hidden"><?php echo "<span class='font-semibold'>" . $name . "</span>"; ?></div>
+            <a href="index.php" class="text-center text-white font-bold ml-4  md:hidden">
+                <?php echo "<span class='font-semibold'>" . $name . "</span>"; ?>
+            </a>
         </div>
         <div class="navbar-center hidden md:flex">
             <ul class="menu menu-horizontal px-1">
@@ -82,9 +84,15 @@ if ($resultb) {
             </ul>
         </div>
         <div class="navbar-end">
-            <a href="<?php echo htmlspecialchars($phone); ?>" class="bg-white rounded-lg py-2 px-4 mr-6 hover:cursor-pointer  hover:bg-red-500">
-            <i class="fa-solid fa-phone text-lg "></i>
-            </a>
+            <div class="flex items-center gap-2 mr-6">
+                <a href="tel:<?php echo htmlspecialchars($phone); ?>" class="text-white rounded-lg">
+                    <i class="fa-solid fa-phone text-lg"></i>
+                </a>
+                <h1 class="text-white hidden md:block">
+                    <?php echo htmlspecialchars($phone); ?>
+                </h1>
+            </div>
+
             <div tabindex="0" role="button" class="bg-orange-600 px-4 py-2 rounded-lg m-1 hover:bg-orange-700"><a
                     href="studentLogin.php">Login</a></div>
         </div>
@@ -117,28 +125,30 @@ if ($resultb) {
     ?>
 
 
-    <div class="container mx-auto p-8">
-        <h2 class="text-3xl font-bold mb-4 text-center">About Us</h2>
+    <div class="container mx-auto p-8 bg-gray-300">
+        <h2 class="text-3xl font-bold mb-4 text-center text-black">About Us</h2>
 
-        <div class="flex flex-col md:flex-row">
-            <div class="w-full md:w-2/4">
-                <img class="w-3/4 mx-auto" src="uploads/aboutus.jpg"
-                    alt="">
+        <div class="flex flex-col md:flex-row ">
+            <div class="w-full md:w-2/4 pb-2 border-r-4 border-black hidden md:block">
+                <img class="w-2/5 mx-auto" src="uploads/aboutus.jpg" alt="">
             </div>
-            <div class="bg-gray-100 p-6 text-center w-full md:w-2/4 rounded-md shadow-md">
+            <div class="w-full md:w-2/4 pb-2 border-b-4 border-black md:hidden">
+                <img class="w-2/5 mx-auto" src="uploads/aboutus.jpg" alt="">
+            </div>
+            <div class="bg-gray-300 p-6 text-center w-full md:w-2/4">
                 <h3 class="text-2xl font-bold mb-2">
-                    <?= $name ?>
+                    <?= $namea ?>
                 </h3>
                 <p class="text-lg text-gray-600 font-semibold mb-2">
-                    <?= $designation ?>
+                    <?= $designationa ?>
                 </p>
                 <p class="text-gray-800 text-lg mt-2 w-full md:w-3/4 mx-auto text-start">
-                    <?= $details ?>
+                    <?= $detailsa ?>
                 </p>
             </div>
         </div>
-
     </div>
+
     <?php include 'footer.php'; ?>
 </body>
 

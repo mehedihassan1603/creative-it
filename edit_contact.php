@@ -1,6 +1,12 @@
 <?php
 include 'config.php';
-
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+if (!isset($_SESSION['email'])) {
+    header("Location: login.php");
+    exit();
+}
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST["name"];
     $email = $_POST["email"];
@@ -16,6 +22,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Error: " . $insertQuery . "<br>" . $conn->error;
     }
 
+}
+
+if (isset($_GET['logout'])) {
+	session_destroy();
+	header("Location: login.php");
+	exit();
 }
 ?>
 <!DOCTYPE html>
@@ -56,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             <div class="mb-4">
-                <label for="map" class="block text-gray-700 text-sm font-bold mb-2">Google Map iframe:</label>
+                <label for="map" class="block text-gray-700 text-sm font-bold mb-2">Google Map iframe: (Remember Set the width to 100%)</label>
                 <textarea id="map" name="map" rows="4" class="w-full p-2 border rounded"></textarea>
             </div>
 

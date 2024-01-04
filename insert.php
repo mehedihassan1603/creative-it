@@ -34,7 +34,7 @@ if ($checkCertificateIdResult->num_rows > 0) {
         VALUES ('$certificateId', '$name', '$fatherName', '$motherName', '$courseName', '$batchNumber', '$courseEndDate', '$certificateDate', '$email', '$userPassword', '$address', '$phone')";
 
     if ($conn->query($insertSql) === TRUE) {
-        header("refresh:2;url=/cit/admin.php");
+        header("refresh:2;url=admin.php");
         echo '<div id="success-alert" style="background-color: blue; color: white; margin-top:30px; padding:20px;" class="bg-blue-400 text-white text-xl mt-10 p-4 rounded mt-4">
                 <h1>Information added successfully! Wait a second...</h1>
             </div>';

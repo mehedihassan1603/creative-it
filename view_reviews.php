@@ -56,10 +56,10 @@ $result = $conn->query($sql);
         </div>
     </div>
 
-    <div class="container mx-auto p-8">
-        <h2 class="text-3xl text-center font-bold mb-4">Reviews</h2>
+    <div class="container mx-auto p-8 mt-10 h-full overflow-x-hidden">
+        <h2 class="text-3xl text-center font-bold mb-4">All Reviews</h2>
 
-        <div class="swiper-container">
+        <div class="swiper-container w-full">
             <div class="swiper-wrapper">
                 <?php
                 if ($result->num_rows > 0) {
@@ -69,17 +69,17 @@ $result = $conn->query($sql);
                         $rating = $row['rating'];
                         $details = $row['details'];
 
-                        echo '<div class="swiper-slide">';
+                        echo '<div class="swiper-slide w-ful">';
                         echo '<div class="mb-8 flex flex-col justify-center items-center">';
-                        echo '<img src="' . $photo . '" alt="User Photo" class="rounded-full h-24 w-24 object-cover mb-2">';
-                        echo '<h3 class="text-xl font-bold mb-2">' . $name . '</h3>';
-                        echo '<div class="rating">';
+                        echo '<img src="' . $photo . '" alt="User Photo" class="rounded-full h-16 w-16 md:h-24 md:w-24 object-cover mb-2">';
+                        echo '<h3 class="text-base md:text-xl font-bold mb-2">' . $name . '</h3>';
+                        echo '<div class="rating w-3/4 md:w-11/12 flex justify-center ">';
                         for ($i = 1; $i <= 5; $i++) {
                             $checked = $i <= $rating ? 'checked' : '';
                             echo '<input type="radio" name="rating-' . $name . '" class="mask mask-star-2 bg-green-500" ' . $checked . ' />';
                         }
                         echo '</div>';
-                        echo '<p class="text-gray-800">' . $details . '</p>';
+                        echo '<p class="text-gray-800 text-sm md:text-base">' . $details . '</p>';
                         echo '</div>';
                         echo '</div>';
                     }
@@ -95,7 +95,9 @@ $result = $conn->query($sql);
 
     </div>
 
+    <div class="mt-10">
     <?php include 'footer.php'; ?>
+    </div>
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>

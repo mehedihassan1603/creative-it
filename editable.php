@@ -26,10 +26,9 @@ if (isset($_GET['logout'])) {
 </head>
 
 <body class="bg-gray-800 text-white">
-
-    <div class="grid grid-cols-2 justify-center w-10/12 mx-auto text-center text-lg gap-10 mt-10">
+    <div class="grid grid-cols-1 md:grid-cols-2 justify-center w-10/12 mx-auto text-center text-lg gap-10 mt-10">
         <a href="admin.php?page=edit_about_us" class="bg-teal-500 p-3 px-10 py-12 rounded-lg hover:bg-teal-600">Edit About Page</a>
-        <a href="admin.php?page=edit_about_us" class="bg-teal-500 p-3 px-10 py-12 rounded-lg hover:bg-teal-600">Edit Reviews</a>
+        <a href="admin.php?page=edit_reviews" class="bg-teal-500 p-3 px-10 py-12 rounded-lg hover:bg-teal-600">Edit Reviews</a>
         <a href="admin.php?page=edit_contact" class="bg-teal-500 p-3 px-10 py-12 rounded-lg hover:bg-teal-600">Edit contact</a>
         <a href="admin.php?page=edit_privacy" class="bg-teal-500 p-3 px-10 py-12 rounded-lg hover:bg-teal-600">Edit privacy</a>
         <a href="admin.php?page=edit_terms" class="bg-teal-500 p-3 px-10 py-12 rounded-lg hover:bg-teal-600">Edit terms</a>

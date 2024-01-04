@@ -38,6 +38,7 @@ if (isset($_GET['logout'])) {
     <script src="https://kit.fontawesome.com/72d0103d4a.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+
         body {
             font-family: Arial, sans-serif;
             background-color: #585555;
@@ -172,9 +173,9 @@ if (isset($_GET['logout'])) {
 
 <body class="bg-gray-800 text-white">
 
-    <div class="flex flex-col md:flex-row justify-between items-center bg-amber-600 px-10 rounded-lg">
-        <nav class="flex justify-center logo-container relative">
-            <img class="bg-white w-24 rounded-full" src="uploads/abcdef.png?<?php echo time(); ?>" alt="Logo">
+    <div class="flex flex-col md:flex-row justify-between items-center bg-amber-600 px-10 py-6 md:py-0 rounded-lg">
+        <nav class="flex flex-col md:flex-row justify-center logo-container relative">
+            <img class="bg-white w-16 md:w-24 rounded-full" src="uploads/abcdef.png?<?php echo time(); ?>" alt="Logo">
             <i class="fa-solid fa-pen-to-square edit-icon hover:cursor-pointer" onclick="my_modal_6.showModal()"></i>
             <dialog id="my_modal_6" class="modal modal-bottom sm:modal-middle">
                 <form class="nav_form bg-white w-4/5 md:w-2/5 mx-auto" id="uploadForm" enctype="multipart/form-data">
@@ -194,12 +195,12 @@ if (isset($_GET['logout'])) {
         </nav>
 
 
-        <h1 class=" text-2xl py-2 px-1">
+        <h1 class=" text-lg md:text-2xl py-2 px-1">
             <?php echo "<p>" . $name . "</p>"; ?>
         </h1>
 
         <div>
-            <a  class="bg-lime-700 text-2xl py-2 px-1 rounded-md hover:bg-green-600" href="admin.php?page=information">Edit Information</a>
+            <a  class="bg-lime-700 text-lg md:text-2xl py-2 px-1 rounded-md hover:bg-green-600" href="admin.php?page=information">Edit Information</a>
         </div>
 
         <!-- <div class="text-2xl text-center text-red relative hover:cursor-pointer hover:text-white">
@@ -273,7 +274,9 @@ if (isset($_GET['logout'])) {
 
         <div class="bg-white">
             <h1 class="text-white py-2 bg-violet-600 text-3xl text-center">Statistics Bar:</h1>
-            <canvas id="statisticsChart" width="100" height="30"></canvas>
+            <div>
+            <canvas id="statisticsChart" width="100" height="40" ></canvas>
+            </div>
         </div>
     </div>
 

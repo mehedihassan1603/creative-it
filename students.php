@@ -1,8 +1,8 @@
 <?php
-include 'config.php'; 
-
-session_start();
-
+include 'config.php';
+if (session_status() == PHP_SESSION_NONE) {
+	session_start();
+}
 if (!isset($_SESSION['email'])) {
 	header("Location: login.php");
 	exit();
@@ -10,33 +10,25 @@ if (!isset($_SESSION['email'])) {
 if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
 }
-
 $filterCertificateId = isset($_POST['filter_certificate_id']) ? mysqli_real_escape_string($conn, $_POST['filter_certificate_id']) : '';
 $filterCourseName = isset($_POST['filter_course_name']) ? mysqli_real_escape_string($conn, $_POST['filter_course_name']) : '';
 $filterBatchName = isset($_POST['filter_batch_name']) ? mysqli_real_escape_string($conn, $_POST['filter_batch_name']) : '';
 $filterCertificate = isset($_POST['filter_certificate']) ? mysqli_real_escape_string($conn, $_POST['filter_certificate']) : '';
-
 $whereClause = "WHERE 1";
-
 if ($filterCertificateId !== '') {
 	$whereClause .= " AND certificate_id = '$filterCertificateId'";
 }
-
 if ($filterCourseName !== '') {
 	$whereClause .= " AND course_name = '$filterCourseName'";
 }
-
 if ($filterBatchName !== '') {
 	$whereClause .= " AND batch_number = '$filterBatchName'";
 }
-
 if ($filterCertificate === 'with_certificate') {
 	$whereClause .= " AND certificate_id IS NOT NULL AND certificate_id <> ''";
 } elseif ($filterCertificate === 'without_certificate') {
 	$whereClause .= " AND (certificate_id IS NULL OR certificate_id = '')";
 }
-
-
 $per_page = 10;
 $start = 0;
 $current_page = 1;
@@ -75,222 +67,14 @@ if (isset($_GET['logout'])) {
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@4.4.20/dist/full.min.css" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" />
 	<script src="https://cdn.tailwindcss.com"></script>
-	<!-- <link rel="stylesheet" href="css/bootstrap.min.css">
-	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script> -->
 	<style>
-		.mt-100 {
-			margin-top: 50px;
-		}
-
-		.mt-30 {
-			margin-top: 30px;
-		}
-
-		.mb-30 {
-			margin-bottom: 30px;
-		}
-
-		body {
-			font-family: Arial, sans-serif;
-			background-color: #f4f4f4;
-			margin: 0;
-			padding: 0;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			height: auto;
-		}
-
-		.dashboard-container {
-
-			width: 100%;
-		}
-
-		.sidebar {
-
-			background-color: #333;
-			padding: 20px;
-			height: 100vh;
-		}
-
-		.sidebar ul {
-			list-style-type: none;
-			padding: 0;
-		}
-
-		.sidebar li {
-			margin-bottom: 10px;
-		}
-
-		.sidebar a {
-			text-decoration: none;
-		}
-
-		.sidebar a:hover {
-			color: #ffd700;
-		}
-
-		.content {
-			flex-grow: 1;
-			padding: 20px;
-			max-width: 100%;
-		}
-
-		.content h2 {
-			margin-bottom: 20px;
-		}
-
-		form {
-			background-color: #fff;
-			padding: 20px;
-			border-radius: 8px;
-			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-		}
+		
 	</style>
 </head>
 
-<body class="bg-gray-800 text-white">
-	<div class="dashboard-container flex flex-col md:flex-row">
-		<div class="sidebar bg-gray-900 p-4 h-full md:h-screen w-full md:w-60">
-			<div class="sidebar-start">
-				<div class="dropdown">
-					<div tabindex="0" role="button"
-						class="bg-gray-400 p-4 rounded-lg hover:border-2 hover:border-white lg:hidden">
-						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-							stroke="currentColor">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-								d="M4 6h16M4 12h8m-8 6h16" />
-						</svg>
-					</div>
-					<ul tabindex="0"
-						class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-						<li
-							class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-							<a href="/cit/index.php" class="menu-item"
-								style="display: block; width: 100%; height: 100%;">Front Home</a>
-						</li>
-
-						<li
-							class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-							<a href="/cit/admin.php?page=dashboard" class="menu-item"
-								style="display: block; width: 100%; height: 100%;">Profile</a>
-						</li>
-						<li
-							class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-							<a href="/cit/admin.php?page=add_option" class="menu-item"
-								style="display: block; width: 100%; height: 100%;">All Courses</a>
-						</li>
-						<li
-							class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-							<a href="/cit/admin.php?page=add_batch" class="menu-item"
-								style="display: block; width: 100%; height: 100%;">All Batches</a>
-						</li>
-
-						<div class="dropdown dropdown-right">
-							<li tabindex="0" role=""
-								class="menu-item mb-2 bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white"
-								style="display: block; width: 100%; height: 100%;">
-								Manage Students
-							</li>
-							<ul tabindex="0"
-								class="dropdown-content z-[1] menu shadow bg-base-200 p-4 rounded-box w-52">
-								<li
-									class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-									<a href="/cit/admin.php?page=addStudents" class="menu-item"
-										style="display: block; width: 100%; height: 100%;">Add Students</a>
-								</li>
-								<li
-									class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-									<a href="/cit/admin.php?page=pagination" class="menu-item"
-										style="display: block; width: 100%; height: 100%;">View Students</a>
-								</li>
-							</ul>
-						</div>
-
-						<li
-							class="bg-zinc-300 mt-2 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-							<a href="/cit/admin.php?page=users" class="menu-item"
-								style="display: block; width: 100%; height: 100%;">Admin's</a>
-						</li>
-						<li
-                            class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-                            <a href="admin.php?page=editable" class="menu-item"
-                                style="display: block; width: 100%; height: 100%;">Editable Pages</a>
-                        </li>
-						<li
-							class="bg-zinc-300 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-							<a href="/cit/admin.php?logout=true" class="menu-item"
-								style="display: block; width: 100%; height: 100%;">Log Out</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="navbar-center hidden lg:flex">
-				<ul class="menu menu-horizontal px-1">
-					<li
-						class="bg-zinc-300 w-full text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-						<a href="index.php" class="menu-item" style="display: block; width: 100%; height: 100%;">Front
-							Home</a>
-					</li>
-
-					<li
-						class="bg-zinc-300 w-full text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-						<a href="admin.php?page=dashboard" class="menu-item"
-							style="display: block; width: 100%; height: 100%;">Profile</a>
-					</li>
-					<li
-						class="bg-zinc-300 w-full text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-						<a href="admin.php?page=add_option" class="menu-item"
-							style="display: block; width: 100%; height: 100%;">All Courses</a>
-					</li>
-					<li
-						class="bg-zinc-300 w-full text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-						<a href="admin.php?page=add_batch" class="menu-item"
-							style="display: block; width: 100%; height: 100%;">All Batches</a>
-					</li>
-
-					<div class="dropdown dropdown-right w-full">
-						<li tabindex="0" role=""
-							class="menu-item bg-zinc-300 w-full text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white"
-							style="display:block; width: 100%; height: 100%;">
-							Manage Students
-						</li>
-						<ul tabindex="0" class="dropdown-content z-[1] menu shadow bg-base-200 p-4 rounded-box w-52">
-							<li
-								class="bg-zinc-300 w-full text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-								<a href="admin.php?page=addStudents" class="menu-item"
-									style="display: block; width: 100%; height: 100%;">Add Students</a>
-							</li>
-							<li
-								class="bg-zinc-300 w-full text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-								<a href="students.php" class="menu-item"
-									style="display: block; width: 100%; height: 100%;">View Students</a>
-							</li>
-						</ul>
-					</div>
-
-					<li
-						class="bg-zinc-300 w-full mt-2 text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-						<a href="/cit/admin.php?page=users" class="menu-item"
-							style="display: block; width: 100%; height: 100%;">Admin's</a>
-					</li>
-					<li
-                            class="bg-zinc-300 w-full text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-                            <a href="admin.php?page=editable" class="menu-item"
-                                style="display: block; width: 100%; height: 100%;">Editable Pages</a>
-                        </li>
-					<li
-						class="bg-zinc-300 w-full text-black px-4 py-2 rounded-lg hover:bg-zinc-600 hover:cursor-pointer hover:text-white">
-						<a href="/cit/admin.php?logout=true" class="menu-item"
-							style="display: block; width: 100%; height: 100%;">Log Out</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-
-		<div class="content">
-			<div class="container w-11/12 mx-auto p-8">
+<body class="bg-gray-800 text-white w-full">
+	<div class="">
+			<div class="w-full md:w-11/12 mx-auto">
 				<?php
 				$totalRecordsQuery = "SELECT COUNT(*) as total_records FROM students";
 				$totalRecordsResult = $conn->query($totalRecordsQuery);
@@ -406,8 +190,8 @@ if (isset($_GET['logout'])) {
 								echo "<td class='py-2 px-1 text-sm' style='width: 10%'>" . $row['batch_number'] . "</td>";
 								echo "<td class='py-2 px-1 text-sm' style='width: 10%'>" . $row['course_end_date'] . "</td>";
 								echo "<td class='py-2 px-1 text-sm' style='width: 10%'>" . $row['certificate_date'] . "</td>";
-								echo "<td class='py-2 px-1 text-sm' style='width: 5%'><a href='/cit/edit.php?id={$row['id']}' class='text-white p-4 rounded-lg hover:bg-slate-700'>Edit</a></td>";
-								echo "<td class='py-2 px-1 text-sm' style='width: 5%'><a href='/cit/delete.php?id={$row['id']}' class='text-white p-4 rounded-lg hover:bg-slate-700'>Delete</a></td>";
+								echo "<td class='py-2 px-1 text-sm' style='width: 5%'><a href='edit.php?id={$row['id']}' class='text-white p-4 rounded-lg hover:bg-slate-700'>Edit</a></td>";
+								echo "<td class='py-2 px-1 text-sm' style='width: 5%'><a href='delete.php?id={$row['id']}' class='text-white p-4 rounded-lg hover:bg-slate-700'>Delete</a></td>";
 								echo "</tr>";
 							}
 							?>
@@ -415,21 +199,24 @@ if (isset($_GET['logout'])) {
 					</table>
 				</div>
 
-				<ul class="flex gap-5 mt-30">
+				<!-- Update pagination links -->
+				<ul class="flex justify-center gap-5 mt-5">
 					<?php for ($i = 1; $i <= $pagi; $i++): ?>
 						<?php
 						$class = $current_page == $i ? 'bg-green-600 cursor-pointer px-2 py-2 active hover:bg-green-800' : 'page-item p-2 cursor-pointer hover:bg-green-800 hover:p-2';
 						?>
 						<li class="<?php echo $class; ?>">
-							<a class="page-link" href="<?= $class === 'active' ? 'javascript:void(0)' : "?start={$i}" ?>">
+							<a class=""
+								href="<?= $class === 'active' ? 'javascript:void(0)' : "?page={$page}&start={$i}" ?>">
 								<?php echo $i; ?>
 							</a>
 						</li>
 					<?php endfor; ?>
 				</ul>
 
+
 			</div>
-		</div>
+
 	</div>
 
 

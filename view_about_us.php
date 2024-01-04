@@ -63,27 +63,32 @@ if ($result->num_rows > 0) {
         </div>
     </div>
 
-    <div class="container mx-auto p-8">
-        <h2 class="text-3xl font-bold mb-4 text-center">About Us</h2>
+    <div class=" mx-auto h-screen block">
+        <h2 class="text-3xl mt-6 w-10/12 mx-auto md:text-3xl font-bold mb-4 text-center">About Us</h2>
 
-        <div class="bg-white p-6 text-center rounded-md shadow-md">
-            <h3 class="text-2xl font-bold mb-2">
+        <div class="w-full pb-2 w-10/12 mx-auto">
+            <img class="w-[200px] mx-auto" src="uploads/aboutus.jpg" alt="">
+        </div>
+        <div class="mb-6 bg-slate-700 w-10/12 mx-auto p-6 text-center rounded-md shadow-md">
+            <h3 class="text-xl md:text-2xl text-white font-bold mb-2">
                 <?= $name ?>
             </h3>
-            <p class="text-lg text-gray-600 font-semibold mb-2">
+            <p class="text-lg text-gray-600 text-white font-semibold mb-2">
                 <?= $designation ?>
             </p>
-            <p class="text-gray-800 mt-2 w-full md:w-2/4 mx-auto text-start">
+            <p class="text-gray-800 text-white mt-2 w-full md:w-2/4 mx-auto text-start">
                 <?= $details ?>
             </p>
         </div>
-
+        <div class="mt-auto">
+            <?php
+            include 'footer.php';
+            ?>
+        </div>
     </div>
 
 </body>
 
-<?php
-include 'footer.php';
-?>
+
 
 </html>

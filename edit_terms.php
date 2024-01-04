@@ -1,6 +1,12 @@
 <?php
 include 'config.php';
-
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+if (!isset($_SESSION['email'])) {
+    header("Location: login.php");
+    exit();
+}
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST["name"];
     $name1 = $_POST["name1"];
@@ -13,6 +19,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Error: " . $insertQuery . "<br>" . $conn->error;
     }
+}
+if (isset($_GET['logout'])) {
+	session_destroy();
+	header("Location: login.php");
+	exit();
 }
 ?>
 <!DOCTYPE html>

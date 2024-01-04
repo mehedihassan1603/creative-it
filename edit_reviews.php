@@ -1,6 +1,12 @@
 <?php
 include 'config.php';
-
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+if (!isset($_SESSION['email'])) {
+    header("Location: login.php");
+    exit();
+}
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST["name"];
     $rating = isset($_POST["rating"]) ? $_POST["rating"] : 0;
@@ -15,7 +21,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($insertQuery->execute()) {
                 echo " Record added successfully.";
-                header("refresh:1;url=admin.php");
             } else {
                 echo " Error inserting record into database: " . $insertQuery->error;
             }
@@ -29,6 +34,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $conn->close();
+}
+if (isset($_GET['logout'])) {
+	session_destroy();
+	header("Location: login.php");
+	exit();
 }
 ?>
 
@@ -44,76 +54,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@4.4.20/dist/full.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .mt-100 {
-            margin-top: 50px;
-        }
-
-        .mt-30 {
-            margin-top: 30px;
-        }
-
-        .mb-30 {
-            margin-bottom: 30px;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: auto;
-        }
-
-        .dashboard-container {
-
-            width: 100%;
-        }
-
-        .sidebar {
-
-            background-color: #333;
-            padding: 20px;
-            height: 100vh;
-        }
-
-        .sidebar ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .sidebar li {
-            margin-bottom: 10px;
-        }
-
-        .sidebar a {
-            text-decoration: none;
-        }
-
-        .sidebar a:hover {
-            color: #ffd700;
-        }
-
-        .content {
-            flex-grow: 1;
-            padding: 20px;
-            max-width: 100%;
-        }
-
-        .content h2 {
-            margin-bottom: 20px;
-        }
-
-        form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-    </style>
 </head>
 
 <body class="bg-gray-100 flex flex-col">

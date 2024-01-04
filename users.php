@@ -34,7 +34,7 @@ if (isset($_GET['logout'])) {
 
     <div class="container mx-auto p-8">
         <h3 class="text-3xl text-center mt-4">Admin Information</h3>
-        <div class="text-end w-7/12 mx-auto "><a class="py-2 bg-indigo-500 px-1 rounded-md hover:bg-indigo-600" href="signup.php">Create New Admin</a></div>
+        <div class="text-end w-full md:w-7/12 mx-auto mt-6 md:mt-0"><a class="py-2 bg-indigo-500 px-1 rounded-md hover:bg-indigo-600" href="signup.php">Create New Admin</a></div>
         <div class="overflow-x-auto">
             <table class="mt-4 mx-auto">
                 <thead>

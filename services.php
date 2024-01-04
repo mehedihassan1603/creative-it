@@ -34,9 +34,10 @@ mysqli_close($conn);
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <?php while ($row = mysqli_fetch_assoc($result)) : ?>
-                    <div class="bg-slate-600 cursor-pointer p-4 rounded-md zoom hover:zoom">
-                        <h3 class="text-lg font-semibold mb-2 py-10 text-center text-white"><?php echo htmlspecialchars($row['course_name']); ?></h3>
-                    </div>
+                    <a href="<?php echo htmlspecialchars($row['website']); ?>" class="bg-slate-600 flex flex-row pl-10 cursor-pointer py-5 md:py-10 rounded-md zoom hover:zoom">
+                        <div class=""><img class="bg-white w-20 md:w-28 rounded-full" src="<?php echo htmlspecialchars($row['photo']); ?>" alt=""></div>
+                        <h3 class="text-lg flex flex-col ml-10 justify-center font-semibold text-center text-white"><?php echo htmlspecialchars($row['course_name']); ?></h3>
+                    </a>
                 <?php endwhile; ?>
             </div>
         </div>

@@ -1,3 +1,20 @@
+<?php
+
+include 'config.php';
+
+$query = "SELECT * FROM information ORDER BY id DESC LIMIT 1";
+$result = mysqli_query($conn, $query);
+
+if ($result) {
+    $row = mysqli_fetch_assoc($result);
+    $name = $row['name'];
+    $phone = $row['phone'];
+    $photo = $row['photo'];
+} else {
+    echo "Error: " . mysqli_error($conn);
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,21 +36,18 @@
         </div>
     </section> -->
 
-    <div class="carousel w-full">
-        <div id="slide1" class="carousel-item relative w-full h-2/4">
-            <img src="./uploads/Brown.png" class="w-full h-[300px] md:h-[400px] lg:h-[500px]" />
-            <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                <a href="#slide2" class="btn btn-circle">❮</a>
-                <a href="#slide2" class="btn btn-circle">❯</a>
-            </div>
+    <div class="w-full">
+        <div id="slide1" class="relative w-full h-2/4">
+            <img src="uploads/<?php echo htmlspecialchars($row['photo']); ?>" class="w-full h-[250px] md:h-[400px] lg:h-[500px]" />
+            
         </div>
-        <div id="slide2" class="carousel-item relative w-full">
-            <img src="./uploads/graphics.jpg" class="w-full h-[500px]" />
+        <!-- <div id="slide2" class="carousel-item relative w-full">
+            <img src="./uploads/graphics.jpg" class="w-full h-[250px] md:h-[400px] lg:h-[500px]" />
             <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                 <a href="#slide1" class="btn btn-circle">❮</a>
                 <a href="#slide1" class="btn btn-circle">❯</a>
             </div>
-        </div>
+        </div> -->
         
     </div>
 

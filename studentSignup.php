@@ -9,8 +9,8 @@ if (isset($_POST['signup_submit'])) {
     $batch_number = $_POST['batch_number'];
     $email = $_POST['email'];
     $user_password = $_POST['password'];
-
-    // Check if email already exists
+    $address = $_POST['address'];
+    $phone = $_POST['phone'];
     $check_email_sql = "SELECT * FROM students WHERE email = '$email'";
     $check_email_result = $conn->query($check_email_sql);
 
@@ -19,13 +19,8 @@ if (isset($_POST['signup_submit'])) {
         $conn->close();
         exit();
     }
-
-    // Insert into students table
-    $sql = "INSERT INTO students (name, father_name, mother_name, course_name, batch_number, email, password)
-        VALUES ('$name', '$father_name', '$mother_name', '$course_name', '$batch_number', '$email', '$user_password')";
-
-    
-
+    $sql = "INSERT INTO students (email, password, name, father_name, mother_name, address, phone, course_name, batch_number)
+        VALUES ('$email', '$user_password','$name', '$father_name', '$mother_name', '$address', '$phone', '$course_name', '$batch_number')";
     if ($conn->query($sql) === TRUE) {
         header("refresh:2;url=index.php");
         echo '<div id="success-alert" style="background-color: blue; color: white; margin-top:30px; padding:20px;" class="bg-blue-400 text-white text-xl mt-10 p-4 rounded mt-4">
@@ -39,9 +34,8 @@ if (isset($_POST['signup_submit'])) {
     $conn->close();
 }
 
-// Fetch courses
-$sql = "SELECT * FROM courses";
-$query = mysqli_query($conn, $sql);
+$sqla = "SELECT * FROM courses";
+$query = mysqli_query($conn, $sqla);
 $sqlb = "SELECT * FROM batches";
 $queryb = mysqli_query($conn, $sqlb);
 ?>
@@ -86,6 +80,16 @@ $queryb = mysqli_query($conn, $sqlb);
             <div class="mb-4">
                 <label for="mother_name" class="block text-gray-700 font-bold mb-2">Mother's Name:</label>
                 <input type="text" id="mother_name" name="mother_name" required
+                    class="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500">
+            </div>
+            <div class="mb-4">
+                <label for="address" class="block text-gray-700 font-bold mb-2">Address:</label>
+                <input type="text" id="address" name="address" required
+                    class="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500">
+            </div>
+            <div class="mb-4">
+                <label for="phone" class="block text-gray-700 font-bold mb-2">Phone Number:</label>
+                <input type="text" id="phone" name="phone" required
                     class="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500">
             </div>
             <div class="mb-4">

@@ -41,7 +41,7 @@
                 <li class="mr-4"><a href="index.php" class="text-white">Home</a></li>
                 <li class="mr-4"><a href="view_about_us.php" class="text-white">About</a></li>
                 <li class="mr-4"><a href="view_reviews.php" class="text-white">Reviews</a></li>
-                <li class="mr-4"><a href="result.php" class="text-white">Find Result</a></li>
+                <li class="mr-4"><a href="view_contact.php" class="text-white">Contact</a></li>
             </ul>
         </div>
         <div class="navbar-end">

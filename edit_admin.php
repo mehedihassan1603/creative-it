@@ -1,10 +1,22 @@
 <?php
 include 'config.php';
-
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+if (!isset($_SESSION['email'])) {
+    header("Location: login.php");
+    exit();
+}
 $studentId = $_GET['id'];
 $fetchStudentQuery = "SELECT * FROM users WHERE id = $studentId";
 $fetchStudentResult = $conn->query($fetchStudentQuery);
 $studentDetails = $fetchStudentResult->fetch_assoc();
+
+if (isset($_GET['logout'])) {
+	session_destroy();
+	header("Location: login.php");
+	exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +25,7 @@ $studentDetails = $fetchStudentResult->fetch_assoc();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Student</title>
+    <title>Edit Admin</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@4.4.20/dist/full.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" />
 </head>

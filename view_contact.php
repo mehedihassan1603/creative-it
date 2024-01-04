@@ -78,7 +78,7 @@ if ($result->num_rows > 0) {
             <h3 class="text-2xl font-bold mb-2 mt-4">
                 <?= $name ?>
             </h3>
-            <div class="flex justify-center gap-10 mt-10">
+            <div class="flex flex-col md:flex-row justify-center gap-10 mt-10">
                 <div class="text-lg text-gray-600 font-semibold mb-2 flex gap-4 ">
                     <img class="bg-white w-16 h-16 rounded-full"
                         src="https://png.pngtree.com/png-vector/20190927/ourmid/pngtree-email-icon-png-image_1757854.jpg?<?php echo time(); ?>"
@@ -115,8 +115,8 @@ if ($result->num_rows > 0) {
             </div>
         </div>
 
-        <div class="flex justify-center bg-gray-500">
-            <div class="map-wrapper" id="mapwrapper">
+        <div class="bg-gray-500">
+            <div class="" id="">
             <?= $map ?>
             </div>
         </div>

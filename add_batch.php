@@ -1,6 +1,13 @@
 <?php
 include 'config.php';
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
+if (!isset($_SESSION['email'])) {
+    header("Location: login.php");
+    exit();
+}
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['batch_submit'])) {
         $batchName = $_POST['new_batch'];
@@ -21,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>';
                 echo '<script>
                     setTimeout(function(){
-                        window.location.href = "/cit/admin.php?page=add_batch";
+                        window.location.href = "admin.php?page=add_batch";
                     }, 1000);
                   </script>';
                 exit();
@@ -45,6 +52,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 $result = mysqli_query($conn, "SELECT * FROM batches");
+
+if (isset($_GET['logout'])) {
+	session_destroy();
+	header("Location: login.php");
+	exit();
+}
 ?>
 
 
